@@ -172,6 +172,7 @@ mapInfo.update = function (props,props2) {
         '<h2>CK Console Data:</h2>' + printObject(props)
         : 'Hover over a feature <br /> Double click for more info' ) 
         + (props2 ? '<h2>Island Sort Algorithm Results:</h2>' + printObject(props2) : '');
+    this._div.style.fontFamily='Kalam';
 };
 
 mapInfo.addTo(map);
