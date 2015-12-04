@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <!-- Set up Document-->
+        <link rel="icon" type = "assets/png" href="assets/favicon.png" />
+        <title>VPC Shop data</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-    
-    <link rel="icon" type = "image/png" href="image/favicon.png" />
-	<title>VPC Shop data</title>
-	<meta charset="utf-8" />
+        <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+        
+        <!-- Import Dependencies-->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <link rel="stylesheet" href="scripts/libraries/leaflet-search.min.css" />
+        <link rel="stylesheet" href="scripts/libraries/awesomplete.css" />
+        <link rel="stylesheet" href="styles/style.css" type="text/css" media=screen> 
+        <link rel="stylesheet" href="styles/bootstrap.css">
+        
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <script src="scripts/libraries/leaflet-search.src.js"></script>
+        <script src="scripts/libraries/awesomplete.min.js" type="text/javascript"></script>
+        <script src="scripts/libraries/fuse.js" type="text/javascript"></script>
+        <script src='scripts/core/randColor.js' type ='text/javascript' ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        
+        
+        <!-- My external GeoJSON file - MAKE WITH QGIS AND GIVE A VAR DECLARATION -->
+        <!--
+        <script src="IslesLagoon_single.geojson" type="text/javascript"></script>
+        <script src="IslesLagoon_multi.geojson" type="text/javascript"></script>
+        -->
+        <!--    <script type ='text/javascript' src='js/baseLayer.js'></script>-->
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <!-- Fixed to Top Navbar-->
+        <nav class="navbar navbar-default navbar-fixed-top" style="background: rgba(255, 255, 255, 0.7);">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div style="padding:10px">
+                        <a href="http://veniceprojectcenter.org/"><img src="assets/vpc25logo.png"></a>
+                        Shop Mapp App
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Main div for mapp app-->
+        <div id="map" style="style.css">
+        </div>
+        <div id="overlay" style = "style.css">
+            <div id="inner">
+            </div>
+        </div>
 
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    
-    <!-- My external GeoJSON file - MAKE WITH QGIS AND GIVE A VAR DECLARATION -->
-<!--
-    <script src="IslesLagoon_single.geojson" type="text/javascript"></script>
-    <script src="IslesLagoon_multi.geojson" type="text/javascript"></script>
--->
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="js/libraries/awesomplete.css" />
-    <script src="js/libraries/awesomplete.min.js" type="text/javascript"></script>
-    
-    <link rel="stylesheet" href="js/libraries/leaflet-search.min.css" />
-    <script src="js/libraries/leaflet-search.src.js"></script>
-    
-    <script src="js/libraries/fuse.js" type="text/javascript"></script>
-    
-    <link REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen> 
-    <script type ='text/javascript' src='js/core/randColor.js'></script>
-    
-</head>
-<body>    
-	<div id="map" style="style.css">   
-    </div>
-    
-    <script type ='text/javascript' src='js/dictionary.js'></script>
-    <script type ='text/javascript' src='js/styles.js'></script>
-    <script type ='text/javascript' src='js/icons.js'></script>
-    
-    <script type ='text/javascript' src='js/core/geom.js'></script>
-    <script type ='text/javascript' src='js/core/CKtoGeoJSON.js'></script>
-    
-    <script type ='text/javascript' src='js/core/map.js'></script>
-    <script type ='text/javascript' src='js/core/search.js'></script>
-    <script type ='text/javascript' src='js/core/filter.js'></script>
-    <script type ='text/javascript' src='js/core/color.js'></script>
-<!--    <script type ='text/javascript' src='js/baseLayer.js'></script>-->
-    <script type ='text/javascript' src='js/core/moreInfo.js'></script>
-
-    <script type ='text/javascript' src='js/getData.js'></script>
-    <div id="overlay" style = "style.css">
-        <div id="inner"></div>
-    </div>
-</body>
+        <!-- These Dependencies need to be loaded after main div-->
+        <script type ='text/javascript' src='scripts/dictionary.js'></script>
+        <script type ='text/javascript' src='scripts/styles.js'></script>
+        <script type ='text/javascript' src='scripts/icons.js'></script>
+        <script type ='text/javascript' src='scripts/core/geom.js'></script>
+        <script type ='text/javascript' src='scripts/core/CKtoGeoJSON.js'></script>
+        <script type ='text/javascript' src='scripts/core/map.js'></script>
+        <script type ='text/javascript' src='scripts/core/search.js'></script>
+        <script type ='text/javascript' src='scripts/core/filter.js'></script>
+        <script type ='text/javascript' src='scripts/core/color.js'></script>
+        <script type ='text/javascript' src='scripts/core/moreInfo.js'></script>
+        <script type ='text/javascript' src='scripts/getData.js'></script>  
+    </body>
 </html>
