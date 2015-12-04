@@ -125,6 +125,7 @@ var ColorControl = L.Control.extend({
         
         this.functionSelect = createDropdown(["random","gradient"]);
         this.div.appendChild(this.functionSelect);
+//        this.div.style.marginTop = "70px";
         
         this.appliedFunction = this.selectedFunctions()[0];
         

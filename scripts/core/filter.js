@@ -89,6 +89,7 @@ var FilterControl = L.Control.extend({
         
         this.functionSelect = createDropdown(["=","<",">","contains"]);
         this.div.appendChild(this.functionSelect);
+        this.div.style.marginTop = "70px";
             
         this.textInput = document.createElement("INPUT");
         applyStyle(this.textInput,FilterElement_style(this.textInput));

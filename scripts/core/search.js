@@ -5,6 +5,8 @@ var searchControl = L.control.search({
     zoom: 15,
     layer: searchLayers,
     propertyName: 'Nome_Isola',
+    position: 'bottomleft',
+    marginTop: '70px',
     circleLocation: false,
     filterData: function(text, records) {
         var jsons = searchControl.fuse.search(text),

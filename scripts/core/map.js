@@ -10,7 +10,7 @@ var feature_layers = [];
 
 var overlayFlag = 0;
 
-var map = L.map('map').setView([45.4375, 12.3398], 14);
+var map = L.map('map', {zoomControl: false}).setView([45.4375, 12.3385], 14);
 
 //**********************************************************************************************
 var defaultLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
@@ -36,6 +36,8 @@ var basicLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.outdoors/{z
         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.outdoors'
 });
+
+new L.Control.Zoom({ position: 'bottomright'}).addTo(map);
 //**********************************************************************************************
 
 function partial(func /*, 0..n args */) {
@@ -156,6 +158,7 @@ var mapInfo = L.control();
 mapInfo.onAdd = function (map){
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this._div.style.maxWidth = "300px";
+    this._div.style.marginTop = "70px";
     this.update();
     return this._div;
 };
