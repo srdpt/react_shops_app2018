@@ -259,6 +259,8 @@ var loadStatus = [];
 function getGroupCallback(options,customArgs,groupURL,msg) {
     jsonList = msg;
     //console.log(jsonList.members);
+    console.log("*******");
+    console.log(options);
     var statusIndex = loadStatus.length;
     loadStatus.push({});
     

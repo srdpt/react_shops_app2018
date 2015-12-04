@@ -89,12 +89,52 @@ getIslands('IslesLagoon_multi.geojson'),{searchInclude: ['Nome_Isola','Numero']}
 // the above layer probably matches up with the images in
 //https://cityknowledge.firebaseio.com/groups/convent%20floor%20plans.json"
 
+//function getGroup(URL,options,customArgs){
+//    //$.getJSON(URL,partial(getGroupCallback,tag,customArgs,URL));
+//    $.getJSON(URL,function(msg){getGroupCallback(options,customArgs,URL,msg);});
+//}
+
+
 getGroup("https://ckdata.firebaseio.com/groups/MERGE%20Stores%202012.json",{filter:function(obj){
-    if(obj["2015"]) return true;
+    if(obj["2015"]){ 
+            if(obj["2015"]["shop_type"] == "Tourist"){
+             return true;    
+            }  
+    }
     
-}},{pointToLayer: function(feature,latlng){
-    return new L.marker(latlng, {icon: storeIcon}).bindPopup("<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url + "\"/><br/>" + "Name: " + feature.properties['2015'].name + "<br/> Address: " + feature.properties['2015'].address_number + " " + feature.properties['2015'].address_street +  "<br/> Nace+ Code: " + feature.properties['2015'].nace_plus_code + "<br/> Good Sold: " + feature.properties['2015'].nace_plus_descr + "<br/> Store Type: " + feature.properties['2015'].shop_type);
+}},
+{
+    pointToLayer: function(feature,latlng){
+        return new L.marker(latlng, {icon: storeIcon}).bindPopup(
+            "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url + "\"/>" + 
+            "<br/> Name: " + feature.properties['2015'].name + 
+            "<br/> Address: " + feature.properties['2015'].address_number + 
+            " " + feature.properties['2015'].address_street +  
+            "<br/> Nace+ Code: " + feature.properties['2015'].nace_plus_code + 
+            "<br/> Good Sold: " + feature.properties['2015'].nace_plus_descr + 
+            "<br/> Store Type: " + feature.properties['2015'].shop_type);
 }});
+
+getGroup("https://ckdata.firebaseio.com/groups/MERGE%20Stores%202012.json",{filter:function(obj){
+    if(obj["2015"]){ 
+            if(obj["2015"]["shop_type"] == "Resident"){
+             return true;    
+            }  
+    }
+    
+}},
+{
+    pointToLayer: function(feature,latlng){
+        return new L.marker(latlng, {icon: storeIcon}).bindPopup(
+            "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url + "\"/>" + 
+            "<br/> Name: " + feature.properties['2015'].name + 
+            "<br/> Address: " + feature.properties['2015'].address_number + 
+            " " + feature.properties['2015'].address_street +  
+            "<br/> Nace+ Code: " + feature.properties['2015'].nace_plus_code + 
+            "<br/> Good Sold: " + feature.properties['2015'].nace_plus_descr + 
+            "<br/> Store Type: " + feature.properties['2015'].shop_type);
+}});
+
 
 
 // ~~~~~~~~ useful datasets not tagged by location ~~~~~~~~
