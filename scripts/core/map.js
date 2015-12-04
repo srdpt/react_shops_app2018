@@ -10,6 +10,8 @@ var feature_layers = [];
 
 var overlayFlag = 0;
 
+L.accessToken = 'pk.eyJ1Ijoia3lnYW5kb21pIiwiYSI6ImNpaHJ5cHFxazAwMmJ2ZG01cjFxcDRuMHkifQ.nAldTCaIaaNQd6a8kxSdRA';
+
 var map = L.map('map', {zoomControl: false}).setView([45.4375, 12.3385], 14);
 
 //**********************************************************************************************
@@ -29,7 +31,7 @@ var satelliteLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.streets
     id: 'mapbox.streets-satellite'
 });
 
-var basicLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.outdoors/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
+var basicLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.high-contrast/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
     maxZoom: 20, minZoom: 10,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -235,9 +237,9 @@ map.on('locationerror', onLocationError);
 
 // define the base and overlay maps so that they can be toggled
 var baseMaps = {
-    "Default": defaultLayer,
+    "Basic": defaultLayer,
     "Satellite": satelliteLayer,
-    "Basic": basicLayer
+    "Grayscale": basicLayer
 };
 
 var mapOverlays = {
@@ -389,6 +391,62 @@ function initializeCollection(statusIndex,options,customArgs,groupURL,groupMSG){
     }
     return false;
 }
+
+//*********************** KT ADDING SOME STUFF ***********************
+//******************* WHETHER STUFF WORKS IS UNCLEAR *****************
+// This website seems promising : https://www.mapbox.com/mapbox.js/example/v1.0.0/filtering-marker-clusters/
+// But the code wasnt set up using mapbox :/ which makes doing this a little difficult
+
+var layers;
+
+L.featureLayer()
+    .loadURL('https://ckdata.firebaseio.com/groups/MERGE%20Stores%202012.json')
+    .on('ready', function(e) {
+        layers = e.target;
+        showShops();
+    });
+
+var filters = document.getElementById('dem').filters;
+
+function showShops() {
+    // first collect all of the checked boxes and create an array of strings
+    // like ['green', 'blue']
+    var list = [];
+    for (var i = 0; i < filters.length; i++) {
+        if (filters[i].checked) list.push(filters[i].value);
+    }
+    // then remove any previously-displayed marker groups
+    overlays.clearLayers();
+    // create a new marker group
+    var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
+    // and add any markers that fit the filtered criteria to that group.
+    layers.eachLayer(function(layer) {
+        if (list.indexOf(layer.feature.properties.line) !== -1) {
+            clusterGroup.addLayer(layer);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
