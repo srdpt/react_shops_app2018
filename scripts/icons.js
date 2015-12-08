@@ -7,7 +7,5 @@ var customIcon = L.Icon.extend({
     }
 });
 // then define the individual icons by feeding in the image URLs
-var hotelIcon = new customIcon({iconUrl: 'assets/icons/lodging-2.png'});
-var churchIcon = new customIcon({iconUrl: 'assets/icons/cathedral.png'});
-var conventIcon = new customIcon({iconUrl: 'assets/icons/convent-2.png'});
+
 var storeIcon = new customIcon({iconUrl: 'assets/icons/mall.png'});

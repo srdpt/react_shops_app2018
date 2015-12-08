@@ -95,7 +95,7 @@ var ColorControl = L.Control.extend({
         
         var labelDiv = document.createElement("DIV");
         var label = document.createElement("IMG");
-        label.setAttribute('src','assets/color.png');
+        label.setAttribute('src','image/color.png');
         applyStyle(labelDiv,FilterElement_style(labelDiv));
         labelDiv.style.float = 'left';
         labelDiv.onclick = function(e){
@@ -125,7 +125,6 @@ var ColorControl = L.Control.extend({
         
         this.functionSelect = createDropdown(["random","gradient"]);
         this.div.appendChild(this.functionSelect);
-//        this.div.style.marginTop = "70px";
         
         this.appliedFunction = this.selectedFunctions()[0];
         

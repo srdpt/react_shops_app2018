@@ -9,6 +9,13 @@ html, body
     z-index:1;
 } 
 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    width: 210px;
+    overflow-x: hidden;
+}
+
 .legend {
     line-height: 18px;
     color: #555;

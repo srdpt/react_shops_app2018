@@ -56,15 +56,15 @@ function CKtoGeoJSON(CKjson){
     //search through properties of the newly created GeoJSON object to find Islands.
     Array.prototype.push.apply(geoJson.properties.islands,findIslands(geoJson.properties));
     
-    if(geoJson.properties.islands.length === 0){
-        Array.prototype.push.apply(geoJson.properties.islands,queryIslands_LAYER(islands_layer,geoJson));
-//        if(singleLayer){
-//            Array.prototype.push.apply(geoJson.properties.islands,queryIslands_JSON(singleLayer,geoJson));
-//        }
-//        if(multiLayer){
-//            Array.prototype.push.apply(geoJson.properties.islands,queryIslands_JSON(multiLayer,geoJson));
-//        }
-    }
+//    if(geoJson.properties.islands.length === 0){
+//        Array.prototype.push.apply(geoJson.properties.islands,queryIslands_LAYER(islands_layer,geoJson));
+////        if(singleLayer){
+////            Array.prototype.push.apply(geoJson.properties.islands,queryIslands_JSON(singleLayer,geoJson));
+////        }
+////        if(multiLayer){
+////            Array.prototype.push.apply(geoJson.properties.islands,queryIslands_JSON(multiLayer,geoJson));
+////        }
+//    }
     
     //TODO: ??? IF STILLL no islands, find nearest Island/Islands??? (nearest to each point if a polygon)
     

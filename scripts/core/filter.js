@@ -58,7 +58,7 @@ var FilterControl = L.Control.extend({
 
         var labelDiv = document.createElement("DIV");
         var label = document.createElement("IMG");
-        label.setAttribute('src','assets/filter.png');
+        label.setAttribute('src','image/filter.png');
         applyStyle(labelDiv,FilterElement_style(labelDiv));
         labelDiv.style.float = 'left';
         labelDiv.onclick = function(e){
@@ -89,7 +89,6 @@ var FilterControl = L.Control.extend({
         
         this.functionSelect = createDropdown(["=","<",">","contains"]);
         this.div.appendChild(this.functionSelect);
-        this.div.style.marginTop = "70px";
             
         this.textInput = document.createElement("INPUT");
         applyStyle(this.textInput,FilterElement_style(this.textInput));
