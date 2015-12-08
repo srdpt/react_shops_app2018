@@ -208,5 +208,182 @@ function showShops() {
 
 //Here the code determines which icon to use based on demographics and good sold
 function getIcon(good_sold){
-    return storeIcon;
+    switch(good_sold){
+            case 'Closed':
+                return closedIcon;
+            case 'Souvenirs':
+                return souveniersIcon;
+            case 'Gelateria':
+                return gelateriaIcon;
+            case 'Bakery':
+                return bakeryIcon;
+            case 'Restaurant':
+                return restaurantIcon;
+            case 'Tobacco Store':
+                return tobaccoStoreIcon;
+            case 'Hotel':
+                return hotelIcon;
+            case 'Grocery Store':
+                return groceryStoreIcon;
+            case 'Pharmacy':
+                return pharmacyIcon;
+            case 'Bank':
+                return bankIcon;
+            case 'Leather Goods':
+                return leatherGoodsIcon;
+            case 'Art':
+                return artIcon;
+            case 'Pizzeria'
+                return pizzeriaIcon;
+            case 'Jewelry':
+                return jewelryIcon;
+            case 'Clothing':
+                return clothingIcon;
+            case 'Bar':
+                return barIcon;
+            case 'Optical Store':
+                return opticalStoreIcon;
+            case 'Electronics':
+                return electronicsIcon;
+            case 'Shoes':
+                return shoesIcon;
+            case 'Exchange':
+                return exchangeIcon;
+            case 'Hotel with Restaurant':
+                return hotelWithRestaurantIcon;
+            case 'Bed and Breakfast':
+                return bedAndBreakfastIcon;
+            case 'Boat Supplies':
+                return boatSuppliesIcon;
+            case 'Travel Agency':
+                return travelAgencyIcon;
+            case 'Office Supplies':
+                return officeSuppliesIcon;
+            case 'Hair Salon':
+                return hairSalonIcon;
+            case 'Household Goods':
+                return householdGoodIcon;
+            case 'Books':
+                return booksIcon;
+            case 'Affitacamere':
+                return affitacamereIcon;
+            case 'Real Estate':
+                return realEstateIcon;
+            case 'Fitness':
+                return fitnessIcon;
+            case 'Wine':
+                return wineIcon;
+            case 'Butcher':
+                return butcherIcon;
+            case 'Antiques':
+                return antiquesIcon;
+            case 'Masseuse':
+                return masseuseIcon;
+            case 'General Store':
+                return generalStoreIcon;
+            case 'Produce':
+                return produceIcon;
+            case 'Textile':
+                return texttileIcon;
+            case 'Florist':
+                return floristIcon;
+            case 'Hardware Store':
+                return hardwareStoreIcon;
+            case 'Toys':
+                return toysIcon;
+            case 'Photo Store':
+                return photoStoreIcon;
+            case 'Accessories':
+                return accessoriesIcon;
+            case 'Dry Cleaner':
+                return dryCleanerIcon;
+            case 'Tailor':
+                return tailorIcon;
+            case 'Appartment Rental':
+                return appartmentRentalIcon;
+            case 'Wood Work':
+                return woodWorkIcon;
+            case 'Hostel':
+                return hostelIcon;
+            case 'Fish':
+                return fishIcon;
+            case 'Other Recreational Activites':
+                return otherRecreationalActivitiesIcon;
+            case 'Pet Store':
+                return petStoreIcon;
+            case 'Cosmetics':
+                return cosmeticsIcon;
+            case 'Perfume':
+                return perfumeIcon;
+            case 'Undergarments':
+                return undergarmentsIcon;
+            case 'Wedding':
+                return weddingIcon;
+            case 'Metal Work':
+                return metalWorkIcon;
+            case 'Repair':
+                return repairIcon;
+            case 'Coffee':
+                return coffeeIcon;
+            case 'Furniture':
+                return furnitureIcon;
+            case 'Candy':
+                return candyIcon;
+            case 'Dairy':
+                return dairyIcon;
+            case 'Funeral Services':
+                return funeralServicesIcon;
+            case 'Nail Salon':
+                return nailSalonIcon;
+            case 'Funeral Goods':
+                return funeralGoodsIcon;
+            case 'Graphic Design':
+                return graphicDesignIcon;
+            case 'Stationery':
+                return stationeryIcon;
+            case 'Tattoo and Piercing':
+                return tattooAndPiercingIcon;
+            case 'Costumes':
+                return costumesIcon;
+            case 'Knives':
+                return knivesIcon;
+            case 'Medical Goods':
+                return medicalGoodsIcon;
+            case 'Delivery':
+                return deliveryIcon;
+            case 'Spa':
+                return spaIcon;
+            case 'Photographer':
+                return photographerIcon;
+            case 'Entertainment':
+                return entertainmentIcon;
+            case 'Liquor':
+                return liquorIcon;
+            case 'Sporting Goods':
+                return sportingGoodsIcon;
+            case 'Computer Services':
+                return computerServicesIcon;
+            case 'Photocopy':
+                return photocopyIcon;
+            case 'Luxury':
+                return luxuryIcon;
+            case 'Laundromat':
+                return laundromatIcon;
+            case 'Money Transfer':
+                return moneyTransferIcon;
+            case 'Car Rental':
+                return carRentalIcon;
+            case 'Transportation':
+                return transportationIcon;
+            case 'Coins and Stamps':
+                return coinsAndStampsIcon;
+            case 'Gloves':
+                return;
+            case 'Hotel Without Restaurant':
+                return hotelWithoutRestaurantIcon;
+            case 'Computers':
+                return computersIcon;
+            case 'Musical Instruments':
+                return musicalInstrumentsIcon;
+    } 
 }
