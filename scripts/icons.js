@@ -10,7 +10,6 @@ var customIcon = L.Icon.extend({
 
 var storeIcon = new customIcon({iconUrl: 'assets/icons/mall.png'});
 var souvenirsIcon = new customIcon({iconUrl: 'assets/shopsicons/gifts.png'});
-var souvenirsIcon = new customIcon({iconUrl: 'assets/shopsicons/gifts.png'});
 var gelateriaIcon = new customIcon({iconUrl: 'assets/shopsicons/icecream.png'});
 var bakeryIcon = new customIcon({iconUrl: 'assets/shopsicons/bread.png'});
 var restaurantIcon = new customIcon({iconUrl: 'assets/shopsicons/restaurant.png'});
@@ -75,7 +74,7 @@ var nailSalonIcon = new customIcon({iconUrl: 'assets/shopsicons/nailsalon.png'})
 var funeralGoodsIcon = new customIcon({iconUrl: 'assets/shopsicons/funeralgoods.png'});
 var graphicDesignIcon = new customIcon({iconUrl: 'assets/shopsicons/graphicdesign.png'});
 var stationeryIcon = new customIcon({iconUrl: 'assets/shopsicons/stationary.png'});
-var tatooAndPiercing = new customIcon({iconUrl: 'assets/shopsicons/tatoo.png'});
+var tattooAndPiercingIcon = new customIcon({iconUrl: 'assets/shopsicons/tatoo.png'});
 var costumesIcon = new customIcon({iconUrl: 'assets/shopsicons/costume.png'});
 var knivesIcon = new customIcon({iconUrl: 'assets/shopsicons/knives.png'});
 var medicalGoodsIcon = new customIcon({iconUrl: 'assets/shopsicons/medicalgoods.png'});

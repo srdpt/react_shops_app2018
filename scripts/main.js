@@ -124,15 +124,15 @@ $.ajax({
 });
 
 
-//This is the function where the actual filtering occurs
-//It is called whenever a user clicks on a checkbox
+//This method is where the actual filtering occurs
+//And it gets called whenever a user clicks on a checkbox
 function showShops() {
     //Store values to filter data by
     var list_dem_filters = [];
     var list_plat_filters = [];
     var list_goods_filters = [];
     
-    //Check the checkboxes to see if they are checked
+    //Check the checkboxes to see if any have been checked
     for (var i = 0; i < filters_dem.length; i++) {
         if (filters_dem[i].checked) list_dem_filters.push(filters_dem[i].value);
     }
@@ -142,10 +142,6 @@ function showShops() {
     for (var i = 0; i < filters_goods.length; i++) {
         if (filters_goods[i].checked) list_goods_filters.push(filters_goods[i].value);
     }
-    
-    var filters = [list_dem_filters, list_plat_filters, list_goods_filters];
-    console.log("******");
-//    console.log(list);
 
     //For the first time since we cant remove a layer that hasnt been added
     if(featureLayer && map.hasLayer(featureLayer))
@@ -160,19 +156,19 @@ function showShops() {
             return false;    
         }
         
-        //find list with longest filter
+        //Find the longest list of filters
         var longest = [];
+        var filters = [list_dem_filters, list_plat_filters, list_goods_filters];
         for(var i = 0; i < filters.length; i++){
             if(filters[i].length > longest.length){
                 longest = filters[i];
             }
         }
+    
+        console.log("********");
         
         //Loop through nonsense
         for(index in longest){
-            console.log("***");
-//            console.log(list[index]);
-            console.log(feature.properties['2015'].nace_plus_descr);
             if((list_dem_filters.length == 0 || list_dem_filters.indexOf(feature.properties['2015'].shop_type) !== -1) &&                
                (list_goods_filters.length == 0 || list_goods_filters.indexOf(feature.properties['2015'].nace_plus_descr) !== -1) &&
                (list_plat_filters.length == 0 || list_plat_filters.indexOf(feature.properties['2015'].plateatici) !== -1)){
@@ -181,14 +177,15 @@ function showShops() {
         }
         
         return false;
-        
-        // return (list.indexOf(feature.properties['2015'].shop_type) !== -1)
     });
     
+    console.log("********");
+    
     //Place icons
+    //getIcon(feature.properties['2015'].nace_plus_descr)
     featureLayer = L.mapbox.featureLayer(filteredFeatures, {
                 pointToLayer: function(feature,latlng){
-                    return new L.marker(latlng, {icon: getIcon(feature.properties['2015'].nace_plus_descr)}).bindPopup(
+                    return new L.marker(latlng, {icon: getIcon(feature.properties['2015'].nace_plus_descr) }).bindPopup(
                         "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url_small + "\"/>" + 
                         "<br/> Name: " + feature.properties['2015'].name + 
                         "<br/> Address: " + feature.properties['2015'].address_number + 
@@ -208,11 +205,12 @@ function showShops() {
 
 //Here the code determines which icon to use based on demographics and good sold
 function getIcon(good_sold){
+    console.log(good_sold);
     switch(good_sold){
-            case 'Closed':
-                return closedIcon;
+//            case 'Closed':
+//                return closedIcon;
             case 'Souvenirs':
-                return souveniersIcon;
+                return souvenirsIcon;
             case 'Gelateria':
                 return gelateriaIcon;
             case 'Bakery':
@@ -233,7 +231,7 @@ function getIcon(good_sold){
                 return leatherGoodsIcon;
             case 'Art':
                 return artIcon;
-            case 'Pizzeria'
+            case 'Pizzeria':
                 return pizzeriaIcon;
             case 'Jewelry':
                 return jewelryIcon;
@@ -262,7 +260,7 @@ function getIcon(good_sold){
             case 'Hair Salon':
                 return hairSalonIcon;
             case 'Household Goods':
-                return householdGoodIcon;
+                return householdGoodsIcon;
             case 'Books':
                 return booksIcon;
             case 'Affitacamere':
@@ -378,12 +376,14 @@ function getIcon(good_sold){
             case 'Coins and Stamps':
                 return coinsAndStampsIcon;
             case 'Gloves':
-                return;
-            case 'Hotel Without Restaurant':
+                return glovesIcon;
+            case 'Hotel Without Restaurants':
                 return hotelWithoutRestaurantIcon;
             case 'Computers':
                 return computersIcon;
             case 'Musical Instruments':
                 return musicalInstrumentsIcon;
+            default:
+                return storeIcon;
     } 
 }
