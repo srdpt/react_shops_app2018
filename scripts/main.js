@@ -26,6 +26,7 @@ $('#plat .dropdown-menu').on({
 //*********************************************************************************************
 // This section sets up the map object
 L.mapbox.accessToken = 'pk.eyJ1Ijoia3lnYW5kb21pIiwiYSI6ImNpaHJ5cHFxazAwMmJ2ZG01cjFxcDRuMHkifQ.nAldTCaIaaNQd6a8kxSdRA';
+var loader = document.getElementById('loader');
 var map = L.mapbox.map('map', null, { zoomControl:false }).setView([45.4375, 12.3385], 14);
 
 
@@ -223,6 +224,27 @@ mapInfo.addTo(map);
 //*********************************************************************************************
 // This section handles filtering the stores
 
+
+
+//****************************************************
+// Functions for loading screen
+
+function startLoading() {
+    loader.className = 'top';
+}
+
+function finishedLoading() {
+    // first, toggle the class 'done', which makes the loading screen
+    // fade out
+    loader.className = 'done';
+    setTimeout(function() {
+        // then, after a half-second, add the class 'hide', which hides
+        // it completely and ensures that the user can interact with the
+        // map again.
+        loader.className = 'hide';
+    }, 500);
+}
+
 //First lets get all the checkboxes that the data can be filtered by 
 var filters_dem = document.getElementById('check_dem').filters;
 var filters_plat = document.getElementById('check_plat').filters;
@@ -233,6 +255,7 @@ var all_shop_json;
 var members_list;
 var featureLayer;
 var shops = {type: "FeatureCollection", features:[]};
+startLoading();
 $.ajax({
         dataType: 'json',
         url: "https://ckdata.firebaseio.com/data.json",
@@ -240,12 +263,14 @@ $.ajax({
             console.log("TURNIPS!");
             console.log(response);
             all_shop_json = response;
+            finishedLoading();
             $.ajax({
                 dataType: 'json',
                 url: "https://ckdata.firebaseio.com/groups/MERGE%20Stores%202012.json",
                 success: function(response) {
                     console.log("Im over here!");
                     console.log(response);
+                    finishedLoading();
                     members_list = response.members;
                     for(property in all_shop_json){
                         if(all_shop_json.hasOwnProperty(property)&&members_list.hasOwnProperty(property)){
@@ -264,11 +289,13 @@ $.ajax({
 //Get data in the Chamber of Commerce from firebase
 var all_cc_shops;
 var cc_shops = {type: "FeatureCollection", features:[]};
+startLoading();
 $.ajax({
         dataType: 'json',
         url: "https://ckdata.firebaseio.com/shops.json",
         success: function(response) {
             console.log("We did it :D");
+            finishedLoading();
             console.log(response);
             all_cc_shops = response;
             for(property in all_cc_shops){
@@ -281,6 +308,7 @@ $.ajax({
             console.log(cc_shops);
         }
 });
+
 
 
 //This method is where the actual filtering occurs

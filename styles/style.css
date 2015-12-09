@@ -133,3 +133,65 @@ a.Xbutton {
 a.Xbutton:hover { 
     border-color: powderblue;  
 }
+
+$circle-size:10vmin;
+
+* {
+  box-sizing:border-box;
+  position:relative;
+}
+
+body {
+  background:#222;
+  overflow:hidden;
+}
+
+.circle {
+  animation:spin 3s linear infinite both;
+  background:#bada55;
+  border-radius:100vmax;
+  /* margin:calc(50vh - 5vmin) calc(50vw - 1vmin); */ /* Half the longest viewport width minus half the width/height of the circle. */
+  margin:60vh calc(50vw - 1vmin);
+  height:10vmin;
+  position:absolute;
+  width:10vmin;
+}
+.circle + .circle {
+  animation:spin 3s linear 1s infinite both;
+  background:#10aded;
+}
+.circle + .circle + .circle {
+  animation:spin 3s linear 2s infinite both;
+  background:#a991e5;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(360deg) translate(0vmax,-10vmax);
+	}
+  50% {
+    transform: rotate(180deg) translate(0vmax,0vmax);
+  }
+	100% {
+    transform: rotate(0deg) translate(0vmax,-10vmax);
+	}
+}
+
+#loader {
+    position:absolute; top:0; bottom:0; width:100%;
+    background:rgba(255, 255, 255, .5);
+    transition:background 1s ease-out;
+    -webkit-transition:background 1s ease-out;
+    z-index: 2;
+}
+#loader.done {
+    background:rgba(255, 255, 255, 0);
+}
+#loader.hide {
+    display:none;
+}
+#loader .message {
+    position:absolute;
+    left:50%;
+    top:50%;
+}
+
