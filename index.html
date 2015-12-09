@@ -75,7 +75,7 @@
                         </div>    
                 </div>
                 <!-- Dropdown menus -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
                     <div style="margin-top:5px">
                         <ul class="nav navbar-nav">
                             <!-- Demographics : Tourist Resident Mixed -->
@@ -214,48 +214,28 @@
         
         
         <!-- Fixed to Bottom Navbar here-->
-        <nav class="navbar navbar-default navbar-fixed-bottom" style="background: rgba(255, 255, 255, 0.8); font-family: 'Kalam'">
+        <nav class="footer navbar navbar-default navbar-fixed-bottom" style="background: rgba(255, 255, 255, 0.8); font-family: 'Kalam'">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <div class="navbar-brand">
-                        Chamber of Commerce Data
-                    </div>
-                </div>                           
-
-                
-                <!-- Filter by Options-->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
-                    <ul class="nav navbar-nav">
-                        
-                        <!-- Ethnic Ownership -->
-                        <li class="dropdown" id="dem">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ethnicity of Ownership<span class="caret"></span></a>
-                          <ul class="dropdown-menu" id="fdem" style="padding:5px">
-                              <form id='check_dem'>
-                                    <li><input type="checkbox" name='filters' value="Venetian" onclick='showShops();'>&nbsp; Venetian</li>
-                                    <li><input type="checkbox" name='filters' value="Bangladesh" onclick='showShops();'>&nbsp; Bangladesh</li>
-                                    <li><input type="checkbox" name='filters' value="Eygptian" onclick='showShops();'>&nbsp; Egyptian</li>
-                                    <li><input type="checkbox" name='filters' value="Other" onclick='showShops();'>&nbsp; Other</li>
-                              </form>
-                            </ul>
-                        </li>
-                        
-                        <!-- People vs Corporation -->
-                        <li class="dropdown" id="dem">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Person or Corportation?<span class="caret"></span></a>
-                          <ul class="dropdown-menu" id="fdem" style="padding:5px">
-                              <form id='check_dem'>
-                                    <li><input type="checkbox" name='filters' value="Y" onclick='showShops();'>&nbsp; Person</li>
-                                    <li><input type="checkbox" name='filters' value="N" onclick='showShops();'>&nbsp; Corporation</li>
-                              </form>
-                            </ul>
-                        </li>
-                        
-                        
-                    </ul>
+                <div class="footer navbar-header">
+                    <a class="navbar-brand" href="#">Chamber of Commerce Data</a>
+                    <button type="button" class="footer navbar-toggle" data-toggle="footer collapse" data-target="#footer_content">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                 </div>
-                
+                <div id="footer_content" class="footer navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="#">Home</a></li>
+                      <li><a href="#">About</a></li>
+                      <li><a href="#">Contact</a></li>
+                    </ul>
+                    <div class="footer navbar-header navbar-right">
+                        <p class="navbar-text">
+                        <a href="#" class="navbar-link">Username</a>
+                        </p>
+                    </div>
+                </div>
                 
                 
             </div>
