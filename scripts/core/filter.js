@@ -53,24 +53,24 @@ var FilterControl = L.Control.extend({
         return this.div;
     },
     
-    setupImage : function(){
-        var that = this;
-
-        var labelDiv = document.createElement("DIV");
-        var label = document.createElement("IMG");
-        label.setAttribute('src','image/filter.png');
-        applyStyle(labelDiv,FilterElement_style(labelDiv));
-        labelDiv.style.float = 'left';
-        labelDiv.onclick = function(e){
-            that.minimize(!that.minimized);
-            if(e.stopPropagation){
-                e.stopPropagation();
-            }
-            return false;
-        }
-        labelDiv.appendChild(label);
-        this.div.appendChild(labelDiv);
-    },
+//    setupImage : function(){
+//        var that = this;
+//
+//        var labelDiv = document.createElement("DIV");
+//        var label = document.createElement("IMG");
+//        label.setAttribute('src','assets/filter.png');
+//        applyStyle(labelDiv,FilterElement_style(labelDiv));
+//        labelDiv.style.float = 'left';
+//        labelDiv.onclick = function(e){
+//            that.minimize(!that.minimized);
+//            if(e.stopPropagation){
+//                e.stopPropagation();
+//            }
+//            return false;
+//        }
+//        labelDiv.appendChild(label);
+//        this.div.appendChild(labelDiv);
+//    },
     
     setObject : function(object){
         var that = this;
@@ -130,8 +130,8 @@ var FilterControl = L.Control.extend({
         this.div.innerHTML = '';
         applyStyle(this.div,Filter_style(this.div));
 
-        this.setupImage();
-        
+//        this.setupImage();
+//        
         if(bool==false){
             
             this.div.appendChild(this.fieldSelect);

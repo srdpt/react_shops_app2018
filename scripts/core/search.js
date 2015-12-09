@@ -126,5 +126,5 @@ function valsToStrings(object){
 
 searchControl.refresh();
 
-searchControl.addTo(map);
-searchControl._container.style.clear = 'none';
+//searchControl.addTo(map);
+//searchControl._container.style.clear = 'none';

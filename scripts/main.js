@@ -1,5 +1,6 @@
 var featureCollections={};
 var islandsCollection={};
+var feature_layers = [];
 
 //*********************************************************************************************
 // This section is to prevent dropdown on toolbar from disappearing when the user clicks on a checkbox
@@ -62,7 +63,8 @@ map.on('locationfound', onLocationFound);
 
 // If the user's location couldn't be found, display an alert
 function onLocationError(e) {
-    alert(e.message);
+    console.log("Uh-Oh, something went wrong");
+//    alert(e.message);
 }
 
 // Set a listner on the map that calls onLocationError when the user's location is unable to be found
@@ -79,8 +81,145 @@ L.control.layers({
 
 // Move the zoom button to bottom right so the app looks prettier
 new L.Control.Zoom({ position: 'bottomright'}).addTo(map);
-    
 
+//*********************************************************************************************
+//This section sets up the island layer and highlight capabilities
+//Add base geojson to map with islands data
+var islands_layer = L.geoJson(null, {
+    style: Island_style,
+    onEachFeature: partial(saveAndHighlight,islands_layer)
+}).addTo(map);
+
+
+//Method for Loading in Island Data
+function getIslands(path,options){
+    $.getJSON(path,function(msg){
+        var layer = msg;
+
+        for(var i=0,iLen=layer.features.length;i<iLen;i++){
+            var feature = layer.features[i];
+            feature.visible = true;
+            islandsCollection[feature.properties.Numero] = feature;
+        }
+        islands_layer.addData(layer);
+        if(!filter.object){
+            filter.setObject(layer.features[0].properties);
+            filter.minimize(filter.minimized);
+        }
+        if(!colorControl.object){
+            colorControl.setObject(layer.features[0].properties);
+            colorControl.minimize(filter.minimized);
+        }
+        
+        if(options){
+            if(options.searchInclude){
+                searchControl.includeKeys(options.searchInclude);
+            }
+            if(options.searchExclude){
+                searchControl.searchExclude(options.searchExclude);
+            }
+        }
+        
+        searchControl.refresh();
+        recolorIsles();
+    });
+}
+
+//Call methods for loading in Islands data
+getIslands('IslesLagoon_single.geojson',{searchInclude: ['Nome_Isola','Numero']});
+getIslands('IslesLagoon_multi.geojson'),{searchInclude: ['Nome_Isola','Numero']};
+
+//Partial method, does something important
+function partial(func /*, 0..n args */) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return function() {
+    var allArguments = args.concat(Array.prototype.slice.call(arguments));
+    return func.apply(this, allArguments);
+  };
+}
+
+//Method for highlighting features
+function highlightFeature(e) {
+    var layer = e.target;
+    
+    // instead of updating info on one layer, an if statement can be used here to show info
+    // on multiple layers. for more info, see the following:
+    //http://gis.stackexchange.com/questions/68941/how-to-add-remove-legend-with-leaflet-layers-control
+    if(layer.feature.properties.islands){
+         //// islands stored layer.feature.properties.islands as an ARRAY
+         //mapInfo.update(layer.feature.properties.data);
+         console.log(layer.feature.properties.data);
+        mapInfo.update(layer.feature.properties.data,layer.feature.properties.islands);
+    } else {
+         layer.setStyle(Highlight_style(layer.feature));
+         mapInfo.update(layer.feature.properties);
+    }  
+}
+
+//Method for saving and highlighting features
+function saveAndHighlight(parent, feature, layer) {
+    setupHighlight(feature,layer);
+}
+
+//Method for resetting the highlight
+function resetHighlight(e) {
+        var layer = e.target;
+       // console.log(e.target);
+        if(!layer.feature.properties.data){
+            islands_layer.resetStyle(e.target)
+        }
+    
+        mapInfo.update();
+}
+
+//Method for setting up the highlight 
+function setupHighlight(feature, layer) {
+    if(layer.feature.properties.data){
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight
+        });
+    } else {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+        });
+    }
+}
+
+//**********************************************************************************************
+// set up an information box for population data
+var mapInfo = L.control();
+
+mapInfo.onAdd = function (map){
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this._div.style.maxWidth = "300px";
+    this._div.style.marginTop = "5px";
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+
+mapInfo.update = function (props,props2) {
+    this._div.innerHTML = '<h4>General Information</h4>' +
+       (props ?
+        '<h2>CK Console Data:</h2>' + 
+        'Island Name: ' + props.Nome_Isola +
+        '<br/> Island Number: ' + props.Numero +
+        '<br/> Sestiere Code: ' + props.Superficie +
+        '<br/> Area: ' + props.Superficie + " m^2" + 
+        '<br/> Total Shops: XXXXXXX' +
+        '<br/> Total Pop: ' + props.sum_pop_11 +
+        '<br/> Pop Density: ' + props.pop_den_11
+        
+        : 'Hover over an island' ) 
+        + (props2 ? '<h2>Island Sort Algorithm Results:</h2>' + printObject(props2) : '');
+    this._div.style.fontFamily='Kalam';
+};
+
+mapInfo.addTo(map);
+    
 //*********************************************************************************************
 // This section handles filtering the stores
 
@@ -89,10 +228,9 @@ var filters_dem = document.getElementById('check_dem').filters;
 var filters_plat = document.getElementById('check_plat').filters;
 var filters_goods = document.getElementById('check_goods').filters;
 
-//Get data from firebase
+//Get data collected in 2015 from firebase
 var all_shop_json;
 var members_list;
-var gJSON;
 var featureLayer;
 var shops = {type: "FeatureCollection", features:[]};
 $.ajax({
@@ -120,6 +258,27 @@ $.ajax({
                     showShops();
                 }
             });
+        }
+});
+
+//Get data in the Chamber of Commerce from firebase
+var all_cc_shops;
+var cc_shops = {type: "FeatureCollection", features:[]};
+$.ajax({
+        dataType: 'json',
+        url: "https://ckdata.firebaseio.com/shops.json",
+        success: function(response) {
+            console.log("We did it :D");
+            console.log(response);
+            all_cc_shops = response;
+            for(property in all_cc_shops){
+                if(all_cc_shops.hasOwnProperty(property) && all_cc_shops[property].hasOwnProperty('lat') && all_cc_shops[property].hasOwnProperty('lng')){
+                    cc_shops.features.push(CKtoGeoJSON(all_cc_shops[property]));   
+                }
+            }
+            
+            console.log("We've made it to the windows!");
+            console.log(cc_shops);
         }
 });
 
@@ -205,10 +364,10 @@ function showShops() {
 
 //Here the code determines which icon to use based on demographics and good sold
 function getIcon(good_sold){
-    console.log(good_sold);
+    
     switch(good_sold){
-//            case 'Closed':
-//                return closedIcon;
+            case 'Closed':
+                return closedIcon;
             case 'Souvenirs':
                 return souvenirsIcon;
             case 'Gelateria':

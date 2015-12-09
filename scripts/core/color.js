@@ -1,6 +1,6 @@
 // create a legend for the colors
 // Create grades using http://colorbrewer2.org/
-var legend = L.control({position: 'bottomright'});
+var legend = L.control({position: 'bottomleft'});
 var legend_div = L.DomUtil.create('div', 'info legend');
 
 var objectColors;
@@ -95,7 +95,7 @@ var ColorControl = L.Control.extend({
         
         var labelDiv = document.createElement("DIV");
         var label = document.createElement("IMG");
-        label.setAttribute('src','image/color.png');
+        label.setAttribute('src','assets/color.png');
         applyStyle(labelDiv,FilterElement_style(labelDiv));
         labelDiv.style.float = 'left';
         labelDiv.onclick = function(e){
@@ -397,7 +397,7 @@ if(keys.length>0){
     fieldsObj = islands_layer.layers[keys[0]].feature.properties;
 }
 
-var colorControl = new ColorControl(fieldsObj,'topleft',function(div){
+var colorControl = new ColorControl(fieldsObj,'bottomleft',function(div){
     div.style.clear = 'both';
 });
 
