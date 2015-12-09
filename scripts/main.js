@@ -372,6 +372,8 @@ function showShops() {
     //getIcon(feature.properties['2015'].nace_plus_descr)
     featureLayer = L.mapbox.featureLayer(filteredFeatures, {
                 pointToLayer: function(feature,latlng){
+                    console.log("********");
+                    console.log(feature.properties['2015'].nace_plus_descr);
                     return new L.marker(latlng, {icon: getIcon(feature.properties['2015'].nace_plus_descr) }).bindPopup(
                         "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url_small + "\"/>" + 
                         "<br/> Name: " + feature.properties['2015'].name + 
@@ -404,7 +406,7 @@ function getIcon(good_sold){
                 return bakeryIcon;
             case 'Restaurant':
                 return restaurantIcon;
-            case 'Tobacco Store':
+            case 'Tobacco':
                 return tobaccoStoreIcon;
             case 'Hotel':
                 return hotelIcon;
@@ -424,7 +426,7 @@ function getIcon(good_sold){
                 return jewelryIcon;
             case 'Clothing':
                 return clothingIcon;
-            case 'Bar':
+            case 'Bars':
                 return barIcon;
             case 'Optical Store':
                 return opticalStoreIcon;
