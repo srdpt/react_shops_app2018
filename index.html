@@ -210,7 +210,12 @@
         </nav>
 
         <!--Map Goes Here-->
-        <div id='map'></div>
+        <div id="map" style="style.css">
+        </div>
+    
+        <div id="overlay" style = "style.css">
+            <div id="inner"></div>
+        </div>
         
         
         <!-- Fixed to Bottom Navbar here-->
@@ -247,7 +252,8 @@
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_ethnic'>
                                         <li><input type="checkbox" name='filters' value="Venetian" onclick='showShops();'>&nbsp; Venetian</li>
-                                        <li><input type="checkbox" name='filters' value="Bangladesh" onclick='showShops();'>&nbsp; Bangladesh</li>
+                                        <li><input type="checkbox" name='filters' value="Chinese" onclick='showShops();'>&nbsp;
+                                        <li><input type="checkbox" name='filters' value="Bangladesh" onclick='showShops();'>&nbsp; Chinese</li>
                                         <li><input type="checkbox" name='filters' value="Eygptian" onclick='showShops();'>&nbsp; Egyptian</li>
                                         <li><input type="checkbox" name='filters' value="Other" onclick='showShops();'>&nbsp; Other</li>
                                   </form>

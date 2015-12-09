@@ -1,6 +1,8 @@
 var featureCollections={};
 var islandsCollection={};
 var feature_layers = [];
+var overlayFlag = 0;
+
 
 //*********************************************************************************************
 // This section is to prevent dropdown on toolbar from disappearing when the user clicks on a checkbox
@@ -74,11 +76,17 @@ map.on('locationerror', onLocationError);
 
 //*********************************************************************************************
 // This section sets up the layer controller
-L.control.layers({
+var check = L.control.layers({
     'Default': L.mapbox.tileLayer('mapbox.streets').addTo(map),
     'Satellite': L.mapbox.tileLayer('mapbox.streets-satellite'),
     'Grayscale': L.mapbox.tileLayer('mapbox.high-contrast'),
 }, {'Current': locationLayer}).addTo(map);    
+
+check.getContainer().ondblclick = function(e){
+    if(e.stopPropagation){
+        e.stopPropagation();
+    }
+};
 
 // Move the zoom button to bottom right so the app looks prettier
 new L.Control.Zoom({ position: 'bottomright'}).addTo(map);
@@ -175,17 +183,33 @@ function resetHighlight(e) {
 
 //Method for setting up the highlight 
 function setupHighlight(feature, layer) {
-    if(layer.feature.properties.data){
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight
-        });
-    } else {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-        });
-    }
+    var originalEvents = layer.on;
+    layer.on({
+        mouseover: function(e){
+            if(originalEvents.mouseover){
+                originalEvents.mouseover(e);
+            }
+            highlightFeature(e);
+        },
+        mouseout: function(e){
+            if(originalEvents.mouseout){
+                originalEvents.mouseout(e);
+            }
+            resetHighlight(e);
+        },
+        dblclick: function(e){
+            if(originalEvents.dblclick){
+                originalEvents.dblclick(e);
+            }
+            zoomToFeature(e)
+        }
+    });
+}
+
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+    var currentLayer = e.target;
+    overlay(currentLayer);
 }
 
 //**********************************************************************************************
@@ -273,9 +297,13 @@ $.ajax({
                     finishedLoading();
                     members_list = response.members;
                     for(property in all_shop_json){
+                        var val_id = property;
                         if(all_shop_json.hasOwnProperty(property)&&members_list.hasOwnProperty(property)){
                             if(all_shop_json[property].hasOwnProperty('2015')) {
-                                shops.features.push(CKtoGeoJSON(all_shop_json[property]));    
+                                
+                                var data = CKtoGeoJSON(all_shop_json[property]);
+                                data['id'] = val_id ;
+                                shops.features.push(data); 
                             }
                         }
                     }
@@ -373,7 +401,7 @@ function showShops() {
     featureLayer = L.mapbox.featureLayer(filteredFeatures, {
                 pointToLayer: function(feature,latlng){
                     console.log("********");
-                    console.log(feature.properties['2015'].nace_plus_descr);
+                    console.log(feature);
                     return new L.marker(latlng, {icon: getIcon(feature.properties['2015'].nace_plus_descr) }).bindPopup(
                         "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url_small + "\"/>" + 
                         "<br/> Name: " + feature.properties['2015'].name + 
@@ -385,7 +413,8 @@ function showShops() {
                         "<br/> Plateaici: " + feature.properties['2015'].plateatici + 
                         "<br/> Tables of two: " + feature.properties['2015'].plateatici_seats_2 +
                         "<br/> Tables of four: " + feature.properties['2015'].plateatici_seats_4 + 
-                        "<br/> Notes: " + feature.properties['2015'].notes);
+                        "<br/> Notes: " + feature.properties['2015'].notes +
+                        "<br/> ck_id: " + feature.id);
                 }
 
             }).addTo(map);
