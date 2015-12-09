@@ -73,6 +73,39 @@ function onLocationError(e) {
 // Set a listner on the map that calls onLocationError when the user's location is unable to be found
 map.on('locationerror', onLocationError);
 
+//**********************************************************************************************
+// set up an information box for population data
+var mapInfo = L.control();
+
+mapInfo.onAdd = function (map){
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this._div.style.maxWidth = "300px";
+    this._div.style.marginTop = "70px";
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+
+mapInfo.update = function (props,props2) {
+    this._div.innerHTML = '<h4>General Information</h4>' +
+       (props ?
+        '<h2>CK Console Data:</h2>' + 
+        'Island Name: ' + props.Nome_Isola +
+        '<br/> Island Number: ' + props.Numero +
+        '<br/> Sestiere Code: ' + props.Superficie +
+        '<br/> Area: ' + props.Superficie + " m^2" + 
+        '<br/> Total Shops: XXXXXXX' +
+        '<br/> Total Pop: ' + props.sum_pop_11 +
+        '<br/> Pop Density: ' + props.pop_den_11
+        
+        : 'Hover over an island <br/> Double click for more data' ) 
+        + (props2 ? '<h2>Island Sort Algorithm Results:</h2>' + printObject(props2) : '');
+    this._div.style.fontFamily='Kalam';
+};
+
+mapInfo.addTo(map);
+
 
 //*********************************************************************************************
 // This section sets up the layer controller
@@ -201,53 +234,19 @@ function setupHighlight(feature, layer) {
             if(originalEvents.dblclick){
                 originalEvents.dblclick(e);
             }
-            zoomToFeature(e)
+//            zoomToFeature(e)
         }
     });
 }
 
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-    var currentLayer = e.target;
-    overlay(currentLayer);
-}
-
-//**********************************************************************************************
-// set up an information box for population data
-var mapInfo = L.control();
-
-mapInfo.onAdd = function (map){
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this._div.style.maxWidth = "300px";
-    this._div.style.marginTop = "5px";
-    this.update();
-    return this._div;
-};
-
-// method that we will use to update the control based on feature properties passed
-
-mapInfo.update = function (props,props2) {
-    this._div.innerHTML = '<h4>General Information</h4>' +
-       (props ?
-        '<h2>CK Console Data:</h2>' + 
-        'Island Name: ' + props.Nome_Isola +
-        '<br/> Island Number: ' + props.Numero +
-        '<br/> Sestiere Code: ' + props.Superficie +
-        '<br/> Area: ' + props.Superficie + " m^2" + 
-        '<br/> Total Shops: XXXXXXX' +
-        '<br/> Total Pop: ' + props.sum_pop_11 +
-        '<br/> Pop Density: ' + props.pop_den_11
-        
-        : 'Hover over an island' ) 
-        + (props2 ? '<h2>Island Sort Algorithm Results:</h2>' + printObject(props2) : '');
-    this._div.style.fontFamily='Kalam';
-};
-
-mapInfo.addTo(map);
+//function zoomToFeature(e) {
+//    map.fitBounds(e.target.getBounds());
+//    var currentLayer = e.target;
+//    overlay(currentLayer);
+//}
     
 //*********************************************************************************************
 // This section 
-
 
 function moreInfo(targets,tag){
     // **************************************
@@ -280,11 +279,8 @@ function moreInfo(targets,tag){
         return output;
     }
 
-
-
 //****************************************************
 // Functions for loading screen
-
 function startLoading() {
     loader.className = 'top';
 }
@@ -301,6 +297,7 @@ function finishedLoading() {
     }, 500);
 }
 
+//****************************************************
 //First lets get all the checkboxes that the data can be filtered by 
 var filters_dem = document.getElementById('check_dem').filters;
 var filters_plat = document.getElementById('check_plat').filters;
@@ -341,6 +338,7 @@ $.ajax({
                     }
                     console.log(shops);
                     showShops();
+//                    moreInfo(shops.features, "shops");
                 }
             });
         }
@@ -426,14 +424,11 @@ function showShops() {
         return false;
     });
     
-    console.log("********");
     
     //Place icons
     //getIcon(feature.properties['2015'].nace_plus_descr)
     featureLayer = L.mapbox.featureLayer(filteredFeatures, {
                 pointToLayer: function(feature,latlng){
-                    console.log("********");
-                    console.log(feature);
                     return new L.marker(latlng, {icon: getIcon(feature.properties['2015'].nace_plus_descr) }).bindPopup(
                         "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url_small + "\"/>" + 
                         "<br/> Name: " + feature.properties['2015'].name + 
