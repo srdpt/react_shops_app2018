@@ -246,7 +246,39 @@ mapInfo.update = function (props,props2) {
 mapInfo.addTo(map);
     
 //*********************************************************************************************
-// This section handles filtering the stores
+// This section 
+
+
+function moreInfo(targets,tag){
+    // **************************************
+    // !!!!!!!! THIS IS A TEST ONLY !!!!!!!! - I'm going to be modifying it 
+    // further as I explore making a table-generation function, setting up titles, and overall styling
+    // **************************************
+        var output = '';
+        output ='<table border="1" style="width:100%">' +
+                        '<tr>' +
+                            '<th>Name</th>' +
+                            '<th>Address</th>' +
+                            '<th>Good Sold</th>' +
+                        '</tr>';
+        targets.forEach(function(target){
+            output +=
+            '<tr>'+
+                '<td>'+ (target["2015"].name ? target["2015"].name : 'N/A') + '</td>' +
+                '<td>'+ target["2015"].address_number 
+                     +' '+ target['2015'].address_street + '</td>' +
+                '<td>'+ (target["2015"].nace_plus_descr=='undefined' ? 'N/A': target["2015"].nace_plus_descr) + '</td>' +
+            '</tr>' ;        
+
+    //                'Name: ' + (target["2015"].name ? target["2015"].name : 'N/A') + '</br>' +
+    //                 'Location: ' + target["2015"].address_number 
+    //                 +' '+ target['2015'].address_street + 
+    //                 '</br>Good sold: ' + (target["2015"].nace_plus_descr ? target["2015"].nace_plus_descr : 'N/A')
+    //                + '</br>'+'</br>';
+        });
+        output = '<center><b>'+ dictionary(tag) +'</b> ('+targets.length+' Total)</br></center>' + output;
+        return output;
+    }
 
 
 
