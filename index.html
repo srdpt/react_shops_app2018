@@ -56,12 +56,12 @@
             } 
             
             .leaflet-bottom.leaflet-left{
-                margin-bottom:38px;
+                margin-bottom:60px;
                 margin-left:-7px;
             }
             
             .leaflet-control-zoom.leaflet-bar.leaflet-control{
-                margin-bottom:45px;
+                margin-bottom:62px;
             }
         </style>
 
@@ -214,30 +214,70 @@
         
         
         <!-- Fixed to Bottom Navbar here-->
-        <nav class="footer navbar navbar-default navbar-fixed-bottom" style="background: rgba(255, 255, 255, 0.8); font-family: 'Kalam'">
+        <nav class="navbar navbar-default navbar-fixed-bottom" style="background: rgba(255, 255, 255, 0.8); font-family: 'Kalam'">
             <div class="container-fluid">
-                <div class="footer navbar-header">
-                    <a class="navbar-brand" href="#">Chamber of Commerce Data</a>
-                    <button type="button" class="footer navbar-toggle" data-toggle="footer collapse" data-target="#footer_content">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="footer_content" class="footer navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                      <li class="active"><a href="#">Home</a></li>
-                      <li><a href="#">About</a></li>
-                      <li><a href="#">Contact</a></li>
-                    </ul>
-                    <div class="footer navbar-header navbar-right">
-                        <p class="navbar-text">
-                        <a href="#" class="navbar-link">Username</a>
-                        </p>
-                    </div>
-                </div>
+              <div class="footer navbar-header">
+                <div class="navbar-brand"></div>
+              </div>
                 
-                
+              <div class="navbar-collapse collapse">
+                  <div style="margin-top:5px">
+                      <ul class="nav navbar-nav">
+                          <!-- Display Chamber of Commerce Data? -->
+                            <li class="dropdown" id="dem" style="margin-bottom:-5px">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chamber of Commerce Data<span class="caret"></span></a>
+                              <ul class="dropdown-menu" id="fdem" style="padding:5px">
+                                  <form id='check_cc'>
+                                        <li><input type="checkbox" name='filters' value="Venetian" onclick='showShops();'>&nbsp; Display Data</li>
+                                        <li><input type="checkbox" name='filters' value="Bangladesh" onclick='showShops();'>&nbsp; Hide Data</li>
+                                  </form>
+                                </ul>
+                            </li>
+                          
+                            <!-- Year Active Slider-->
+                            <li class="label" style="width:270px">
+                                <div>
+                                    <input type="text" id="range" value="" name="range" />
+                                </div>
+                            </li>
+
+                            <!-- Ethnic Ownership -->
+                            <li class="dropdown" id="dem" style="margin-bottom:-5px">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ethnicity of Ownership<span class="caret"></span></a>
+                              <ul class="dropdown-menu" id="fdem" style="padding:5px">
+                                  <form id='check_ethnic'>
+                                        <li><input type="checkbox" name='filters' value="Venetian" onclick='showShops();'>&nbsp; Venetian</li>
+                                        <li><input type="checkbox" name='filters' value="Bangladesh" onclick='showShops();'>&nbsp; Bangladesh</li>
+                                        <li><input type="checkbox" name='filters' value="Eygptian" onclick='showShops();'>&nbsp; Egyptian</li>
+                                        <li><input type="checkbox" name='filters' value="Other" onclick='showShops();'>&nbsp; Other</li>
+                                  </form>
+                                </ul>
+                            </li>
+
+                            <!-- People vs Corporation -->
+                            <li class="dropdown" id="dem" style="margin-bottom:-5px">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Person/Corportation<span class="caret"></span></a>
+                              <ul class="dropdown-menu" id="fdem" style="padding:5px">
+                                  <form id='check_pc'>
+                                        <li><input type="checkbox" name='filters' value="Y" onclick='showShops();'>&nbsp; Person</li>
+                                        <li><input type="checkbox" name='filters' value="N" onclick='showShops();'>&nbsp; Corporation</li>
+                                  </form>
+                                </ul>
+                            </li>
+                          
+                            <!-- Economic Code -->
+                            <li class="dropdown" id="dem" style="margin-bottom:-5px">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Economic Code<span class="caret"></span></a>
+                              <ul class="dropdown-menu" id="fdem" style="padding:5px">
+                                  <form id='check_pc'>
+                                        <li><input type="checkbox" name='filters' value="Code" onclick='showShops();'>&nbsp; Code XXXX</li>
+                                        <li><input type="checkbox" name='filters' value="Code" onclick='showShops();'>&nbsp; Code XXXX</li>
+                                  </form>
+                                </ul>
+                            </li>
+                      </ul>
+                  </div>
+              </div>
             </div>
         </nav>
         
