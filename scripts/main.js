@@ -119,7 +119,7 @@ mapInfo.update = function (props,props2) {
         '<br/> Total Pop: ' + props.sum_pop_11 +
         '<br/> Pop Density: ' + props.pop_den_11
         
-        : 'Hover over an island <br/> Double click for more data' ) 
+        : 'Hover over an island <br/> ' ) 
         + (props2 ? '<h2>Island Sort Algorithm Results:</h2>' + printObject(props2) : '');
     this._div.style.fontFamily='Kalam';
 };
@@ -134,12 +134,12 @@ var check = L.control.layers({
     'Satellite': L.mapbox.tileLayer('mapbox.streets-satellite'),
     'Grayscale': L.mapbox.tileLayer('mapbox.high-contrast'),
 }, {'Current': locationLayer}).addTo(map);    
-
-check.getContainer().ondblclick = function(e){
-    if(e.stopPropagation){
-        e.stopPropagation();
-    }
-};
+//
+//check.getContainer().ondblclick = function(e){
+//    if(e.stopPropagation){
+//        e.stopPropagation();
+//    }
+//};
 
 // Move the zoom button to bottom right so the app looks prettier
 new L.Control.Zoom({ position: 'bottomright'}).addTo(map);
@@ -534,7 +534,7 @@ function show_cc_Shops(){
                 for(index in longest){
                     if((list_check_ethnic.length == 0 || list_check_ethnic.indexOf(feature.properties.persona_nascita) !== -1) &&                
                        (list_check_pc.length == 0 || list_check_pc.indexOf(feature.properties.persona_fisica) !== -1) &&
-                       (list_check_code.length == 0 || list_check_code.indexOf(feature.properties) !== -1)){
+                       (list_check_code.length == 0 || checkEconomicCode(list_check_code, feature.properties.codici_attivita))){
                             //If one exists return true
                             return true
                     }
@@ -550,7 +550,6 @@ function show_cc_Shops(){
         //Place Icons on map
         cc_featureLayer = L.mapbox.featureLayer(cc_filteredFeatures, {
             pointToLayer: function(feature,latlng){
-                console.log("*****************");
                 return L.circle(latlng, 1, {
                             color: 'red',
                             fillColor: '#f03',
@@ -575,6 +574,16 @@ function show_cc_Shops(){
         if(cc_featureLayer && map.hasLayer(cc_featureLayer))
             map.removeLayer(cc_featureLayer);
     }
+}
+
+function checkEconomicCode(list, code){
+    for(index in list){
+        if(code !== undefined && code.indexOf(list[index]) !== -1){
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 //****************************************************

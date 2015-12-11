@@ -258,11 +258,10 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ethnicity of Ownership<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_ethnic'>
-                                        <li><input type="checkbox" name='filters' value="VENEZIA" onclick='showShops();'>&nbsp; Venetian</li>
-                                        <li><input type="checkbox" name='filters' value="CINA REPUBBLICA POPOLARE" onclick='showShops();'>&nbsp; Bangladesh</li>
-                                        <li><input type="checkbox" name='filters' value="BANGLADESH" onclick='showShops();'>&nbsp; Chinese</li>
-                                        <li><input type="checkbox" name='filters' value="EGITTO" onclick='showShops();'>&nbsp; Egyptian</li>
-                                        <li><input type="checkbox" name='filters' value="Other" onclick='showShops();'>&nbsp; Other</li>
+                                        <li><input type="checkbox" name='filters' value="VENEZIA" onclick='show_cc_Shops();'>&nbsp; Venetian</li>
+                                        <li><input type="checkbox" name='filters' value="CINA REPUBBLICA POPOLARE" onclick='show_cc_Shops();'>&nbsp; Chinese</li>
+                                        <li><input type="checkbox" name='filters' value="BANGLADESH" onclick='show_cc_Shops();'>&nbsp; Bangladesh</li>
+                                        <li><input type="checkbox" name='filters' value="EGITTO" onclick='show_cc_Shops();'>&nbsp; Egyptian</li>
                                   </form>
                                 </ul>
                             </li>
@@ -277,14 +276,17 @@
                                   </form>
                                 </ul>
                             </li>
-                          
+
                             <!-- Economic Code -->
                             <li class="dropdown" id="dem" style="margin-bottom:-5px">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Economic Code<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_code'>
-                                        <li><input type="checkbox" name='filters' value="Code" onclick='show_cc_Shops();'>&nbsp; Code XXXX</li>
-                                        <li><input type="checkbox" name='filters' value="Code" onclick='show_cc_Shops();'>&nbsp; Code XXXX</li>
+                                        <li><input type="checkbox" name='filters' value="47.11.2" onclick='show_cc_Shops();'>&nbsp; Supermarkets</li>
+                                        <li><input type="checkbox" name='filters' value="47.11.4" onclick='show_cc_Shops();'>&nbsp; Grocers </li>
+                                      <li><input type="checkbox" name='filters' value="56.3" onclick='show_cc_Shops();'>&nbsp; Bars </li>
+                                      <li><input type="checkbox" name='filters' value="55.1" onclick='show_cc_Shops();'>&nbsp; Hotels </li>
+                                        <li><input type="checkbox" name='filters' value="55.20.51" onclick='show_cc_Shops();'>&nbsp; Bed and Breakfast </li>
                                   </form>
                                 </ul>
                             </li>
