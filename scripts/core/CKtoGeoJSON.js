@@ -27,7 +27,11 @@ function CKtoGeoJSON(CKjson){
     //If there is no shape but there is data, look through data for Lat/Long fields.
     else if(CKjson.data){
         geoJson.geometry["type"]="Point";
-        geoJson.geometry["coordinates"] = findLonLat(CKjson.data);
+        if(CKjson.data !== undefined){
+            geoJson.geometry["coordinates"] = findLonLat(CKjson.data);
+        } else {
+            geoJson.geometry["coordinates"] = findLonLat(CKjson);
+        }
         //Then add all fields to properties
         for(property in CKjson){
             if(Object.prototype.hasOwnProperty.call(CKjson, property)){
@@ -40,7 +44,12 @@ function CKtoGeoJSON(CKjson){
     //If there is no shape and no data, look through the object for Lat/Long fields.
     else{
         geoJson.geometry["type"]="Point";
-        geoJson.geometry["coordinates"] = findLonLat(CKjson.data);
+        if(CKjson.data !== undefined){
+            geoJson.geometry["coordinates"] = findLonLat(CKjson.data);
+        } else {
+            geoJson.geometry["coordinates"] = findLonLat(CKjson);
+        }
+    
         //Then add all fields to properties
         for(property in CKjson){
             if(Object.prototype.hasOwnProperty.call(CKjson, property)){
@@ -274,10 +283,10 @@ function findLonLat(obj){
                 }
             }
             else{
-                if(stringContains((property.toString()).toUpperCase(),"LATITUDE")){
+                if(stringContains((property.toString()).toUpperCase(),"LATITUDE") || stringContains((property.toString()).toUpperCase(),"LAT")){
                     lat = obj[property];
                 }
-                else if(stringContains((property.toString()).toUpperCase(),"LONGTITUDE")||stringContains((property.toString()).toUpperCase(),"LONGITUDE")){
+                else if(stringContains((property.toString()).toUpperCase(),"LONGTITUDE")||stringContains((property.toString()).toUpperCase(),"LONGITUDE") || stringContains((property.toString()).toUpperCase(),"LNG")){
                     lon = obj[property];
                 }
             }

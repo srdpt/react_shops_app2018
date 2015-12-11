@@ -24,6 +24,27 @@ $('#plat .dropdown-menu').on({
     }
 }); 
     
+//*********************************************************************************************
+// This section sets up the Active Year Slider
+var sliderVal = 1950; 
+$(function () {
+    $("#range").ionRangeSlider({
+        hide_min_max: true,
+        keyboard: true,
+        min: 1900,
+        max: 2015,
+        from: 1950,
+        step: 1,
+        grid: true,
+        onLoad: saveResult,
+        onChange: saveResult
+    });
+});
+
+var saveResult = function (data) {
+    sliderVal = data.from;
+    show_cc_Shops();
+};
 
 //*********************************************************************************************
 // This section sets up the map object
@@ -50,8 +71,8 @@ function onLocationFound(e) {
 
     // Create an additional circle showing the approximate radius
     var locationRadius = L.circle(e.latlng, radius, {
-        color: 'red',
-        fillColor: '#f03',
+        color: 'blue',
+        fillColor: 'steelblue',
         fillOpacity: 0.5 
     });
 
@@ -74,7 +95,7 @@ function onLocationError(e) {
 map.on('locationerror', onLocationError);
 
 //**********************************************************************************************
-// set up an information box for population data
+//Set up an information box for population data
 var mapInfo = L.control();
 
 mapInfo.onAdd = function (map){
@@ -85,8 +106,7 @@ mapInfo.onAdd = function (map){
     return this._div;
 };
 
-// method that we will use to update the control based on feature properties passed
-
+//Method that we will use to update the control based on feature properties passed
 mapInfo.update = function (props,props2) {
     this._div.innerHTML = '<h4>General Information</h4>' +
        (props ?
@@ -190,7 +210,6 @@ function highlightFeature(e) {
     if(layer.feature.properties.islands){
          //// islands stored layer.feature.properties.islands as an ARRAY
          //mapInfo.update(layer.feature.properties.data);
-         console.log(layer.feature.properties.data);
         mapInfo.update(layer.feature.properties.data,layer.feature.properties.islands);
     } else {
          layer.setStyle(Highlight_style(layer.feature));
@@ -298,6 +317,8 @@ function finishedLoading() {
 }
 
 //****************************************************
+//This section deals with the data collected by the team for 2015
+
 //First lets get all the checkboxes that the data can be filtered by 
 var filters_dem = document.getElementById('check_dem').filters;
 var filters_plat = document.getElementById('check_plat').filters;
@@ -338,35 +359,10 @@ $.ajax({
                     }
                     console.log(shops);
                     showShops();
-//                    moreInfo(shops.features, "shops");
                 }
             });
         }
 });
-
-//Get data in the Chamber of Commerce from firebase
-var all_cc_shops;
-var cc_shops = {type: "FeatureCollection", features:[]};
-startLoading();
-$.ajax({
-        dataType: 'json',
-        url: "https://ckdata.firebaseio.com/shops.json",
-        success: function(response) {
-            console.log("We did it :D");
-            finishedLoading();
-            console.log(response);
-            all_cc_shops = response;
-            for(property in all_cc_shops){
-                if(all_cc_shops.hasOwnProperty(property) && all_cc_shops[property].hasOwnProperty('lat') && all_cc_shops[property].hasOwnProperty('lng')){
-                    cc_shops.features.push(CKtoGeoJSON(all_cc_shops[property]));   
-                }
-            }
-            
-            console.log("We've made it to the windows!");
-            console.log(cc_shops);
-        }
-});
-
 
 
 //This method is where the actual filtering occurs
@@ -409,8 +405,6 @@ function showShops() {
                 longest = filters[i];
             }
         }
-    
-        console.log("********");
         
         //Loop through nonsense
         for(index in longest){
@@ -448,12 +442,149 @@ function showShops() {
 };
 
 
+//****************************************************
+//This section deals with the data from the Chamber of Commerce
+var cc_featureLayer;
+
+//First lets get all the checkboxes that the data can be filtered by 
+var filters_check_ethnic = document.getElementById('check_ethnic').filters;
+var filters_check_pc = document.getElementById('check_pc').filters;
+var filters_check_code = document.getElementById('check_code').filters;
+
+//Get data from the Chamber of Commerce on firebase
+var all_cc_shops;
+var cc_shops = {type: "FeatureCollection", features:[]};
+//startLoading();
+$.ajax({
+        dataType: 'json',
+        url: "https://ckdata.firebaseio.com/shops.json",
+        success: function(response) {
+            console.log("We did it :D");
+            console.log(response);
+            finishedLoading();
+            all_cc_shops = response;
+            for(property in all_cc_shops){
+                if(all_cc_shops.hasOwnProperty(property) && all_cc_shops[property].hasOwnProperty('lat') && all_cc_shops[property].hasOwnProperty('lng')){
+                    if(all_cc_shops[property].lat !== null && all_cc_shops[property].lng !== null){
+                        cc_shops.features.push(CKtoGeoJSON(all_cc_shops[property]));    
+                    }  
+                }
+            }
+            
+            console.log("We've made it to the windows!");
+            console.log(cc_shops);
+        }
+});
+
+
+
+//This method is where the actual filtering occurs
+//And it gets called whenever a user clicks on a checkbox
+function show_cc_Shops(){
+    //Lets Display some Chamber of Commerce data :D
+    console.log("I see you've clicked");
+    console.log("Lets see what we've got here");
+    console.log(document.getElementById('display').checked);
+    if(document.getElementById('display').checked) {
+        //Store values to filter data by
+        var list_check_ethnic = [];
+        var list_check_pc = [];
+        var list_check_code = [];
+        
+        console.log("Okay onto filtration!");
+        //Check the checkboxes to see if any have been checked
+        for (var i = 0; i < filters_check_ethnic.length; i++) {
+            if (filters_check_ethnic[i].checked) list_check_ethnic.push(filters_check_ethnic[i].value);
+        }
+        for (var i = 0; i < filters_check_pc.length; i++) {
+            if (filters_check_pc[i].checked) list_check_pc.push(filters_check_pc[i].value);
+        }
+        for (var i = 0; i < filters_check_code.length; i++) {
+            if (filters_check_code[i].checked) list_check_code.push(filters_check_code[i].value);
+        }
+        
+        
+        //For the first time since we cant remove a layer that hasnt been added
+        if(cc_featureLayer && map.hasLayer(cc_featureLayer))
+            map.removeLayer(cc_featureLayer);
+        
+        //Filter by features here
+        var cc_filteredFeatures = cc_shops.features.filter(function(feature){
+            //If the shop is active during the given year
+            if((feature.properties.year_born !== "--" ) && 
+                parseInt(feature.properties.year_born) <= sliderVal && 
+               ((feature.properties.year_die == "--" )|| (parseInt(feature.properties.year_die) >= sliderVal))){
+                //If the filter lists are all empty only shops from the given year are displayed
+                if(list_check_ethnic.length == 0 && 
+                   list_check_pc.length == 0 &&
+                   list_check_code.length == 0){
+                    return true; 
+                }
+                
+                //Else find the longest list of filters
+                var longest = [];
+                var filters = [list_check_ethnic, list_check_pc, list_check_code];
+                for(var i = 0; i < filters.length; i++){
+                    if(filters[i].length > longest.length){
+                        longest = filters[i];
+                    }
+                }
+                
+                //And Loop through to remove shops that dont meet the criteria
+                for(index in longest){
+                    if((list_check_ethnic.length == 0 || list_check_ethnic.indexOf(feature.properties.persona_nascita) !== -1) &&                
+                       (list_check_pc.length == 0 || list_check_pc.indexOf(feature.properties.persona_fisica) !== -1) &&
+                       (list_check_code.length == 0 || list_check_code.indexOf(feature.properties) !== -1)){
+                            //If one exists return true
+                            return true
+                    }
+                }
+                //Else return false shop didnt meet criteria
+                return false;  
+            } else {
+                //The shop was not active during the given year
+                return false;
+            }
+        });
+        
+        //Place Icons on map
+        cc_featureLayer = L.mapbox.featureLayer(cc_filteredFeatures, {
+            pointToLayer: function(feature,latlng){
+                console.log("*****************");
+                return L.circle(latlng, 1, {
+                            color: 'red',
+                            fillColor: '#f03',
+                            fillOpacity: 0.5 
+                        })
+                .bindPopup(
+                    //THINGS TO GO IN POPUP HERE!
+                    "Shop Name: " + feature.properties.denominazione + 
+                    "<br/> Address: " + feature.properties.indirizzo + 
+                    "<br/> Sestiere: " + feature.properties.cod_sestiere +
+                    "<br/> Physical Person: " + feature.properties.persona_fisica +
+                    "<br/> Male/Female: " + feature.properties.persona_mf +
+                    "<br/> Place of Birth: " + feature.properties.persona_nascita +
+                    "<br/> Year of Shop Foundation: " + feature.properties.year_born +
+                    "<br/> Year of Shop Closing: " + feature.properties.year_die +
+                    "<br/> Economic Code: " + feature.properties.attivita +
+                    "<br/> Economic Activity: " + feature.properties.codici_attivita);
+            }
+        }).addTo(map);    
+    } else if(document.getElementById('hide').checked) {
+        //Hide everything!
+        if(cc_featureLayer && map.hasLayer(cc_featureLayer))
+            map.removeLayer(cc_featureLayer);
+    }
+}
+
+//****************************************************
+//This section deals with the icons to display
 //Here the code determines which icon to use based on demographics and good sold
 function getIcon(good_sold){
     
     switch(good_sold){
-            case 'Closed':
-                return closedIcon;
+//            case 'Closed':
+//                return closedIcon;
             case 'Souvenirs':
                 return souvenirsIcon;
             case 'Gelateria':

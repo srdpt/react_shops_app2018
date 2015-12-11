@@ -6,7 +6,7 @@
     <head>
         <!-- Title of web page-->
         <link rel="icon" type = "assets/png" href="assets/favicon.png" />
-        <title>Shop Mapp App</title>
+        <title>Shopp Mapp App</title>
         <meta charset=utf-8 />
         <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
         
@@ -62,6 +62,11 @@
                 margin-left:-7px;
             }
             
+            .leaflet-bottom.leaflet-left{
+                margin-bottom:60px;
+                margin-left:-7px;
+            }
+            
             .leaflet-control-zoom.leaflet-bar.leaflet-control{
                 margin-bottom:62px;
             }
@@ -73,7 +78,7 @@
                 <div class="navbar-header" style="margin-bottom:5px">
                         <div class="navbar-brand" style="font-size:25px">
                             <a target="_blank" href="http://veniceprojectcenter.org/"><img src="assets/vpc25logo.png"></a>
-                            Shop Mapp App
+                            Shopp Mapp App
                         </div>    
                 </div>
                 <!-- Dropdown menus -->
@@ -82,7 +87,7 @@
                         <ul class="nav navbar-nav">
                             <!-- Demographics : Tourist Resident Mixed -->
                             <li class="dropdown" id="dem">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Demographics<span class="caret"></span></a>
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groupings<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_dem'>
                                         <li><input type="checkbox" name='filters' value="Tourist" onclick='showShops();'>&nbsp; Tourist Stores</li>
@@ -235,8 +240,8 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chamber of Commerce Data<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_cc'>
-                                        <li><input type="radio" name='filters' value="Y" onclick='showShops();'>&nbsp; Display Data</li>
-                                        <li><input checked="checked" type="radio" name='filters' value="N" onclick='showShops();'>&nbsp; Hide Data</li>
+                                        <li><input name="radAnswer" type="radio" id="display" value="Y" onclick='show_cc_Shops();'>&nbsp; Display Data</li>
+                                        <li><input checked="checked" name="radAnswer" type="radio" id="hide" value="N" onclick='show_cc_Shops();'>&nbsp; Hide Data</li>
                                   </form>
                                 </ul>
                             </li>
@@ -253,10 +258,10 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ethnicity of Ownership<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_ethnic'>
-                                        <li><input type="checkbox" name='filters' value="Venetian" onclick='showShops();'>&nbsp; Venetian</li>
-                                        <li><input type="checkbox" name='filters' value="Chinese" onclick='showShops();'>&nbsp;
-                                        <li><input type="checkbox" name='filters' value="Bangladesh" onclick='showShops();'>&nbsp; Chinese</li>
-                                        <li><input type="checkbox" name='filters' value="Eygptian" onclick='showShops();'>&nbsp; Egyptian</li>
+                                        <li><input type="checkbox" name='filters' value="VENEZIA" onclick='showShops();'>&nbsp; Venetian</li>
+                                        <li><input type="checkbox" name='filters' value="CINA REPUBBLICA POPOLARE" onclick='showShops();'>&nbsp; Bangladesh</li>
+                                        <li><input type="checkbox" name='filters' value="BANGLADESH" onclick='showShops();'>&nbsp; Chinese</li>
+                                        <li><input type="checkbox" name='filters' value="EGITTO" onclick='showShops();'>&nbsp; Egyptian</li>
                                         <li><input type="checkbox" name='filters' value="Other" onclick='showShops();'>&nbsp; Other</li>
                                   </form>
                                 </ul>
@@ -267,8 +272,8 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Person/Corportation<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_pc'>
-                                        <li><input type="checkbox" name='filters' value="Y" onclick='showShops();'>&nbsp; Person</li>
-                                        <li><input type="checkbox" name='filters' value="N" onclick='showShops();'>&nbsp; Corporation</li>
+                                        <li><input type="checkbox" name='filters' value="Y" onclick='show_cc_Shops();'>&nbsp; Person</li>
+                                        <li><input type="checkbox" name='filters' value="N" onclick='show_cc_Shops();'>&nbsp; Corporation</li>
                                   </form>
                                 </ul>
                             </li>
@@ -277,9 +282,9 @@
                             <li class="dropdown" id="dem" style="margin-bottom:-5px">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Economic Code<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
-                                  <form id='check_pc'>
-                                        <li><input type="checkbox" name='filters' value="Code" onclick='showShops();'>&nbsp; Code XXXX</li>
-                                        <li><input type="checkbox" name='filters' value="Code" onclick='showShops();'>&nbsp; Code XXXX</li>
+                                  <form id='check_code'>
+                                        <li><input type="checkbox" name='filters' value="Code" onclick='show_cc_Shops();'>&nbsp; Code XXXX</li>
+                                        <li><input type="checkbox" name='filters' value="Code" onclick='show_cc_Shops();'>&nbsp; Code XXXX</li>
                                   </form>
                                 </ul>
                             </li>
@@ -308,31 +313,6 @@
         <script type ='text/javascript' src='scripts/core/color.js'></script>
         <script type ='text/javascript' src='scripts/core/moreInfo.js'></script>
         <script type ='text/javascript' src='scripts/core/search.js'></script>
-    
-        <script>
-               $(function () {
 
-                    $("#range").ionRangeSlider({
-                        hide_min_max: true,
-                        keyboard: true,
-                        min: 1900,
-                        max: 2015,
-                        from: 1950,
-                        step: 1,
-                        grid: true
-                    });
-
-                });
-            
-        </script>
-        
-        
-<!--
-        <script src="scripts/main.js"></script>
-        <script type ='text/javascript' src='scripts/core/filter.js'></script>
-        <script type ='text/javascript' src='scripts/core/moreInfo.js'></script>
-        <script type ='text/javascript' src='scripts/core/search.js'></script>
-        <script type ='text/javascript' src='scripts/core/color.js'></script>
--->
     </body>
 </html>
