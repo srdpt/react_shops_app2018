@@ -8,7 +8,7 @@ var customIcon = L.Icon.extend({
 });
 // then define the individual icons by feeding in the image URLs
 
-var closedIcon = new customIcon({iconUrl: 'assets/icons/closed.png'});
+var closedIcon = new customIcon({iconUrl: 'assets/shopsicons/closed.png'});
 var storeIcon = new customIcon({iconUrl: 'assets/icons/mall.png'});
 var souvenirsIcon = new customIcon({iconUrl: 'assets/shopsicons/gifts.png'});
 var gelateriaIcon = new customIcon({iconUrl: 'assets/shopsicons/icecream.png'});

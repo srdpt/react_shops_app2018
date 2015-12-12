@@ -592,8 +592,8 @@ function checkEconomicCode(list, code){
 function getIcon(good_sold){
     
     switch(good_sold){
-//            case 'Closed':
-//                return closedIcon;
+            case 'Closed':
+                return closedIcon;
             case 'Souvenirs':
                 return souvenirsIcon;
             case 'Gelateria':
