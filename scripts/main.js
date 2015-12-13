@@ -313,7 +313,7 @@ function finishedLoading() {
         // it completely and ensures that the user can interact with the
         // map again.
         loader.className = 'hide';
-    }, 500);
+    }, 1500);
 }
 
 //****************************************************
@@ -454,7 +454,7 @@ var filters_check_code = document.getElementById('check_code').filters;
 //Get data from the Chamber of Commerce on firebase
 var all_cc_shops;
 var cc_shops = {type: "FeatureCollection", features:[]};
-//startLoading();
+startLoading();
 $.ajax({
         dataType: 'json',
         url: "https://ckdata.firebaseio.com/shops.json",
@@ -550,7 +550,7 @@ function show_cc_Shops(){
         //Place Icons on map
         cc_featureLayer = L.mapbox.featureLayer(cc_filteredFeatures, {
             pointToLayer: function(feature,latlng){
-                return L.circle(latlng, 1, {
+                return L.circle(latlng, 25, {
                             color: 'red',
                             fillColor: '#f03',
                             fillOpacity: 0.5 

@@ -85,17 +85,6 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
                     <div style="margin-top:5px">
                         <ul class="nav navbar-nav">
-                            <!-- Demographics : Tourist Resident Mixed -->
-                            <li class="dropdown" id="dem">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groupings<span class="caret"></span></a>
-                              <ul class="dropdown-menu" id="fdem" style="padding:5px">
-                                  <form id='check_dem'>
-                                        <li><input type="checkbox" name='filters' value="Tourist" onclick='showShops();'>&nbsp; Tourist Stores</li>
-                                        <li><input type="checkbox" name='filters' value="Resident" onclick='showShops();'>&nbsp; Resident Stores</li>
-                                        <li><input type="checkbox" name='filters' value="Mixed" onclick='showShops();'>&nbsp; Mixed Stores</li>
-                                  </form>
-                                </ul>
-                            </li>
                             <!-- Goods Sold -->
                             <li class="dropdown" id="goods">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Goods Sold<span class="caret"></span></a>
@@ -193,6 +182,19 @@
                                 </form>    
                               </ul>
                             </li>
+                            
+                            <!-- Demographics : Tourist Resident Mixed -->
+                            <li class="dropdown" id="dem">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groupings<span class="caret"></span></a>
+                              <ul class="dropdown-menu" id="fdem" style="padding:5px">
+                                  <form id='check_dem'>
+                                        <li><input type="checkbox" name='filters' value="Tourist" onclick='showShops();'>&nbsp; Tourist Stores</li>
+                                        <li><input type="checkbox" name='filters' value="Resident" onclick='showShops();'>&nbsp; Resident Stores</li>
+                                        <li><input type="checkbox" name='filters' value="Mixed" onclick='showShops();'>&nbsp; Mixed Stores</li>
+                                  </form>
+                                </ul>
+                            </li>
+                            
                             <!-- Plateatici Y/N -->
                             <li class="dropdown" id="plat">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plateatici<span class="caret"></span></a>
@@ -205,13 +207,15 @@
                             </li>
                         </ul>
                     </div>    
-                    <!-- Search box -->
+<!--
+                     Search box 
                     <form class="navbar-form navbar-right" role="search" style="margin-top:15px">
                                 <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search Shop Name">
                                 </div>
                                 <button type="submit" class="btn btn-default">Submit</button>
                     </form>
+-->
                 </div> 
             </div>
         </nav>
@@ -229,15 +233,18 @@
         <nav class="navbar navbar-default navbar-fixed-bottom" style="background: rgba(255, 255, 255, 0.8); font-family: 'Kalam'">
             <div class="container-fluid">
               <div class="footer navbar-header">
-                <div class="navbar-brand"></div>
+                <div class="navbar-brand"/>
+                </div>
               </div>
+                
+              <a target="_blank" href="http://www.ve.camcom.gov.it/default.aspx" class="pull-left" style="width:140px"><img src="assets/cc_logo_red.png" style=" margin-top: 10px; width:100%; height:100%"></a>
                 
               <div class="navbar-collapse collapse">
                   <div style="margin-top:5px">
                       <ul class="nav navbar-nav">
                           <!-- Display Chamber of Commerce Data? -->
                             <li class="dropdown" id="dem" style="margin-bottom:-5px">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chamber of Commerce Data<span class="caret"></span></a>
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Show Data<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_cc'>
                                         <li><input name="radAnswer" type="radio" id="display" value="Y" onclick='show_cc_Shops();'>&nbsp; Display Data</li>
@@ -287,6 +294,8 @@
                                       <li><input type="checkbox" name='filters' value="56.3" onclick='show_cc_Shops();'>&nbsp; Bars </li>
                                       <li><input type="checkbox" name='filters' value="55.1" onclick='show_cc_Shops();'>&nbsp; Hotels </li>
                                         <li><input type="checkbox" name='filters' value="55.20.51" onclick='show_cc_Shops();'>&nbsp; Bed and Breakfast </li>
+                                      <li><input type="checkbox" name='filters' value="47.89" onclick='show_cc_Shops();'>&nbsp; Trinkets </li>
+                                    <li><input type="checkbox" name='filters' value="47.52.1" onclick='show_cc_Shops();'>&nbsp; Hardware </li>
                                   </form>
                                 </ul>
                             </li>
