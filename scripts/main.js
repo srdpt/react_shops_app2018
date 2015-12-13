@@ -383,7 +383,6 @@ function showShops() {
     for (var i = 0; i < filters_goods.length; i++) {
         if (filters_goods[i].checked) list_goods_filters.push(filters_goods[i].value);
     }
-
     //For the first time since we cant remove a layer that hasnt been added
     if(featureLayer && map.hasLayer(featureLayer))
         map.removeLayer(featureLayer);
@@ -632,7 +631,7 @@ function getIcon(good_sold){
                 return shoesIcon;
             case 'Exchange':
                 return exchangeIcon;
-            case 'Hotel with Restaurant':
+            case 'Hotel with Restaurants':
                 return hotelWithRestaurantIcon;
             case 'Bed and Breakfast':
                 return bedAndBreakfastIcon;
@@ -762,7 +761,7 @@ function getIcon(good_sold){
                 return coinsAndStampsIcon;
             case 'Gloves':
                 return glovesIcon;
-            case 'Hotel Without Restaurants':
+            case 'Hotel without Restaurants':
                 return hotelWithoutRestaurantIcon;
             case 'Computers':
                 return computersIcon;
