@@ -96,35 +96,35 @@ map.on('locationerror', onLocationError);
 
 //**********************************************************************************************
 //Set up an information box for population data
-var mapInfo = L.control();
-
-mapInfo.onAdd = function (map){
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this._div.style.maxWidth = "300px";
-    this._div.style.marginTop = "70px";
-    this.update();
-    return this._div;
-};
-
-//Method that we will use to update the control based on feature properties passed
-mapInfo.update = function (props,props2) {
-    this._div.innerHTML = '<h4>General Information</h4>' +
-       (props ?
-        '<h2>CK Console Data:</h2>' + 
-        'Island Name: ' + props.Nome_Isola +
-        '<br/> Island Number: ' + props.Numero +
-        '<br/> Sestiere Code: ' + props.Superficie +
-        '<br/> Area: ' + props.Superficie + " m^2" + 
-        '<br/> Total Shops: XXXXXXX' +
-        '<br/> Total Pop: ' + props.sum_pop_11 +
-        '<br/> Pop Density: ' + props.pop_den_11
-        
-        : 'Hover over an island <br/> ' ) 
-        + (props2 ? '<h2>Island Sort Algorithm Results:</h2>' + printObject(props2) : '');
-    this._div.style.fontFamily='Kalam';
-};
-
-mapInfo.addTo(map);
+//var mapInfo = L.control();
+//
+//mapInfo.onAdd = function (map){
+//    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+//    this._div.style.maxWidth = "300px";
+//    this._div.style.marginTop = "70px";
+//    this.update();
+//    return this._div;
+//};
+//
+////Method that we will use to update the control based on feature properties passed
+////mapInfo.update = function (props,props2) {
+////    this._div.innerHTML = '<h4>General Information</h4>' +
+////       (props ?
+////        '<h2>CK Console Data:</h2>' + 
+////        'Island Name: ' + props.Nome_Isola +
+////        '<br/> Island Number: ' + props.Numero +
+////        '<br/> Sestiere Code: ' + props.Superficie +
+////        '<br/> Area: ' + props.Superficie + " m^2" + 
+////        '<br/> Total Shops: XXXXXXX' +
+////        '<br/> Total Pop: ' + props.sum_pop_11 +
+////        '<br/> Pop Density: ' + props.pop_den_11
+////        
+////        : 'Hover over an island <br/> ' ) 
+////        + (props2 ? '<h2>Island Sort Algorithm Results:</h2>' + printObject(props2) : '');
+////    this._div.style.fontFamily='Kalam';
+////};
+////
+////mapInfo.addTo(map);
 
 
 //*********************************************************************************************
@@ -236,26 +236,26 @@ function resetHighlight(e) {
 //Method for setting up the highlight 
 function setupHighlight(feature, layer) {
     var originalEvents = layer.on;
-    layer.on({
-        mouseover: function(e){
-            if(originalEvents.mouseover){
-                originalEvents.mouseover(e);
-            }
-            highlightFeature(e);
-        },
-        mouseout: function(e){
-            if(originalEvents.mouseout){
-                originalEvents.mouseout(e);
-            }
-            resetHighlight(e);
-        },
-        dblclick: function(e){
-            if(originalEvents.dblclick){
-                originalEvents.dblclick(e);
-            }
-//            zoomToFeature(e)
-        }
-    });
+//    layer.on({
+//        mouseover: function(e){
+//            if(originalEvents.mouseover){
+//                originalEvents.mouseover(e);
+//            }
+//            highlightFeature(e);
+//        },
+//        mouseout: function(e){
+//            if(originalEvents.mouseout){
+//                originalEvents.mouseout(e);
+//            }
+//            resetHighlight(e);
+//        },
+//        dblclick: function(e){
+//            if(originalEvents.dblclick){
+//                originalEvents.dblclick(e);
+//            }
+////            zoomToFeature(e)
+//        }
+//    });
 }
 
 //function zoomToFeature(e) {
@@ -267,36 +267,36 @@ function setupHighlight(feature, layer) {
 //*********************************************************************************************
 // This section 
 
-function moreInfo(targets,tag){
-    // **************************************
-    // !!!!!!!! THIS IS A TEST ONLY !!!!!!!! - I'm going to be modifying it 
-    // further as I explore making a table-generation function, setting up titles, and overall styling
-    // **************************************
-        var output = '';
-        output ='<table border="1" style="width:100%">' +
-                        '<tr>' +
-                            '<th>Name</th>' +
-                            '<th>Address</th>' +
-                            '<th>Good Sold</th>' +
-                        '</tr>';
-        targets.forEach(function(target){
-            output +=
-            '<tr>'+
-                '<td>'+ (target["2015"].name ? target["2015"].name : 'N/A') + '</td>' +
-                '<td>'+ target["2015"].address_number 
-                     +' '+ target['2015'].address_street + '</td>' +
-                '<td>'+ (target["2015"].nace_plus_descr=='undefined' ? 'N/A': target["2015"].nace_plus_descr) + '</td>' +
-            '</tr>' ;        
-
-    //                'Name: ' + (target["2015"].name ? target["2015"].name : 'N/A') + '</br>' +
-    //                 'Location: ' + target["2015"].address_number 
-    //                 +' '+ target['2015'].address_street + 
-    //                 '</br>Good sold: ' + (target["2015"].nace_plus_descr ? target["2015"].nace_plus_descr : 'N/A')
-    //                + '</br>'+'</br>';
-        });
-        output = '<center><b>'+ dictionary(tag) +'</b> ('+targets.length+' Total)</br></center>' + output;
-        return output;
-    }
+//function moreInfo(targets,tag){
+//    // **************************************
+//    // !!!!!!!! THIS IS A TEST ONLY !!!!!!!! - I'm going to be modifying it 
+//    // further as I explore making a table-generation function, setting up titles, and overall styling
+//    // **************************************
+//        var output = '';
+//        output ='<table border="1" style="width:100%">' +
+//                        '<tr>' +
+//                            '<th>Name</th>' +
+//                            '<th>Address</th>' +
+//                            '<th>Good Sold</th>' +
+//                        '</tr>';
+//        targets.forEach(function(target){
+//            output +=
+//            '<tr>'+
+//                '<td>'+ (target["2015"].name ? target["2015"].name : 'N/A') + '</td>' +
+//                '<td>'+ target["2015"].address_number 
+//                     +' '+ target['2015'].address_street + '</td>' +
+//                '<td>'+ (target["2015"].nace_plus_descr=='undefined' ? 'N/A': target["2015"].nace_plus_descr) + '</td>' +
+//            '</tr>' ;        
+//
+//    //                'Name: ' + (target["2015"].name ? target["2015"].name : 'N/A') + '</br>' +
+//    //                 'Location: ' + target["2015"].address_number 
+//    //                 +' '+ target['2015'].address_street + 
+//    //                 '</br>Good sold: ' + (target["2015"].nace_plus_descr ? target["2015"].nace_plus_descr : 'N/A')
+//    //                + '</br>'+'</br>';
+//        });
+//        output = '<center><b>'+ dictionary(tag) +'</b> ('+targets.length+' Total)</br></center>' + output;
+//        return output;
+//    }
 
 //****************************************************
 // Functions for loading screen
@@ -549,7 +549,7 @@ function show_cc_Shops(){
         //Place Icons on map
         cc_featureLayer = L.mapbox.featureLayer(cc_filteredFeatures, {
             pointToLayer: function(feature,latlng){
-                return L.circle(latlng, 25, {
+                return L.circle(latlng, 5, {
                             color: 'red',
                             fillColor: '#f03',
                             fillOpacity: 0.5 
