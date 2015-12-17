@@ -26,14 +26,14 @@ $('#plat .dropdown-menu').on({
     
 //*********************************************************************************************
 // This section sets up the Active Year Slider
-var sliderVal = 1950; 
+var sliderVal = 2015; 
 $(function () {
     $("#range").ionRangeSlider({
         hide_min_max: true,
         keyboard: true,
         min: 1900,
         max: 2015,
-        from: 1950,
+        from: 2015,
         step: 1,
         grid: true,
         onLoad: saveResult,
@@ -42,6 +42,8 @@ $(function () {
 });
 
 var saveResult = function (data) {
+    console.log("*****");
+    console.log(data.from);
     sliderVal = data.from;
     show_cc_Shops();
 };
@@ -337,14 +339,13 @@ $.ajax({
             console.log("TURNIPS!");
             console.log(response);
             all_shop_json = response;
-            finishedLoading();
             $.ajax({
                 dataType: 'json',
                 url: "https://ckdata.firebaseio.com/groups/MERGE%20Stores%202012.json",
                 success: function(response) {
                     console.log("Im over here!");
                     console.log(response);
-                    finishedLoading();
+//                    finishedLoading();
                     members_list = response.members;
                     for(property in all_shop_json){
                         var val_id = property;
@@ -453,7 +454,7 @@ var filters_check_code = document.getElementById('check_code').filters;
 //Get data from the Chamber of Commerce on firebase
 var all_cc_shops;
 var cc_shops = {type: "FeatureCollection", features:[]};
-startLoading();
+//startLoading();
 $.ajax({
         dataType: 'json',
         url: "https://ckdata.firebaseio.com/shops.json",
@@ -472,6 +473,7 @@ $.ajax({
             
             console.log("We've made it to the windows!");
             console.log(cc_shops);
+            show_cc_Shops();
         }
 });
 
@@ -491,6 +493,8 @@ function show_cc_Shops(){
         var list_check_code = [];
         
         console.log("Okay onto filtration!");
+        console.log("********");
+        console.log(sliderVal);
         //Check the checkboxes to see if any have been checked
         for (var i = 0; i < filters_check_ethnic.length; i++) {
             if (filters_check_ethnic[i].checked) list_check_ethnic.push(filters_check_ethnic[i].value);
