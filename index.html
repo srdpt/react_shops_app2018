@@ -207,15 +207,6 @@
                             </li>
                         </ul>
                     </div>    
-<!--
-                     Search box 
-                    <form class="navbar-form navbar-right" role="search" style="margin-top:15px">
-                                <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search Shop Name">
-                                </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
--->
                 </div> 
             </div>
         </nav>
@@ -263,19 +254,25 @@
                             <!-- Ethnic Ownership -->
                             <li class="dropdown" id="dem" style="margin-bottom:-5px">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ethnicity of Ownership<span class="caret"></span></a>
-                              <ul class="dropdown-menu" id="fdem" style="padding:5px">
+                              <ul class="dropdown-menu scrollable-menu" id="fdem" style="padding:5px">
                                   <form id='check_ethnic'>
                                         <li><input type="checkbox" name='filters' value="VENEZIA" onclick='show_cc_Shops();'>&nbsp; Venetian</li>
                                         <li><input type="checkbox" name='filters' value="CINA REPUBBLICA POPOLARE" onclick='show_cc_Shops();'>&nbsp; Chinese</li>
                                         <li><input type="checkbox" name='filters' value="BANGLADESH" onclick='show_cc_Shops();'>&nbsp; Bangladesh</li>
                                         <li><input type="checkbox" name='filters' value="EGITTO" onclick='show_cc_Shops();'>&nbsp; Egyptian</li>
+                                      <li><input type="checkbox" name='filters' value="FRANCIA" onclick='show_cc_Shops();'>&nbsp; France</li>
+                                      <li><input type="checkbox" name='filters' value="STATI UNITI D'AMERICA" onclick='show_cc_Shops();'>&nbsp; United States</li>
+                                      <li><input type="checkbox" name='filters' value="REGNO UNITO (Inghilterra, Gran Bretagna)" onclick='show_cc_Shops();'>&nbsp; United Kingdom</li>
+                                      
                                   </form>
+                                  
+                                  
                                 </ul>
                             </li>
 
                             <!-- People vs Corporation -->
                             <li class="dropdown" id="dem" style="margin-bottom:-5px">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Person/Corportation<span class="caret"></span></a>
+                              <a href="#" class="dropdown-toggle scrollable-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Person/Corportation<span class="caret"></span></a>
                               <ul class="dropdown-menu" id="fdem" style="padding:5px">
                                   <form id='check_pc'>
                                         <li><input type="checkbox" name='filters' value="Y" onclick='show_cc_Shops();'>&nbsp; Person</li>
@@ -283,7 +280,7 @@
                                   </form>
                                 </ul>
                             </li>
-
+                          
                             <!-- Economic Code -->
                             <li class="dropdown" id="dem" style="margin-bottom:-5px">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Economic Code<span class="caret"></span></a>
@@ -296,6 +293,9 @@
                                         <li><input type="checkbox" name='filters' value="55.20.51" onclick='show_cc_Shops();'>&nbsp; Bed and Breakfast </li>
                                       <li><input type="checkbox" name='filters' value="47.89" onclick='show_cc_Shops();'>&nbsp; Trinkets </li>
                                     <li><input type="checkbox" name='filters' value="47.52.1" onclick='show_cc_Shops();'>&nbsp; Hardware </li>
+                                      
+<!-- To add a new economic code to filter the data by simply add : <li><input type="checkbox" name='filters' value="***Put economic code here***" onclick='show_cc_Shops();'>&nbsp; ****Put name of store of code here to display in dropdown***** </li>-->
+                                      
                                   </form>
                                 </ul>
                             </li>
@@ -324,6 +324,7 @@
         <script type ='text/javascript' src='scripts/core/color.js'></script>
         <script type ='text/javascript' src='scripts/core/moreInfo.js'></script>
         <script type ='text/javascript' src='scripts/core/search.js'></script>
+        <script type ='text/javascript' src='scripts/core/randColor.js'></script>
 
     </body>
 </html>
