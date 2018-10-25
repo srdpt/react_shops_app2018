@@ -6,7 +6,7 @@ export const AboutText = styled.p`
   color: ${colors.lightBeige};
   font-family: ${fonts.arvo}, serif;
   font-size: ${fontSizes.regular};
-  padding-right: 15px;
+  padding-right: 20px;
 `;
 
 export const BottomNavContainer = styled.div`

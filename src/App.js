@@ -1,37 +1,10 @@
 import React, { Component } from "react";
 import BottomBar from "./containers/bottom_bar";
-import SideMenu from "./containers/side_menu";
-import * as firebase from "firebase";
-
+import FilterMenu from "./containers/filter_menu";
 import MapContainer from "./containers/map_container";
-
-const testStores = [
-  {
-    key: "a",
-    lat: 45.43492287,
-    lon: 12.33919474,
-    name: "Leather Goods Store"
-  },
-  {
-    key: "b",
-    lat: 45.43781593,
-    lon: 12.33657174,
-    name: "Gelateria"
-  }
-];
-
-var config = {
-  apiKey: "AIzaSyC0irXhh2E1ajz5Dd_6TAd5z2MqQCYm0sg",
-  authDomain: "shopp-mapp-app-1540459083700.firebaseapp.com",
-  databaseURL: "https://shopp-mapp-app-1540459083700.firebaseio.com",
-  projectId: "shopp-mapp-app-1540459083700",
-  storageBucket: "shopp-mapp-app-1540459083700.appspot.com",
-  messagingSenderId: "856865559762"
-};
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
+import * as firebase from "firebase";
+import { initFire } from "./store/firebase";
+import { createYearList } from "./constants/year_lists";
 
 class App extends Component {
   state = {
@@ -39,11 +12,13 @@ class App extends Component {
   };
 
   componentWillMount = () => {
-    let temp = [];
+    initFire();
+    createYearList();
     const dataRef = firebase.database().ref("/");
+    let temp = [];
     dataRef.on("child_added", snapshot => {
       let item = snapshot.val();
-
+      //TODO: filter by year
       temp.push({
         key: item.g,
         lat: parseFloat(item.data.latitude, 10),
@@ -60,10 +35,9 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.currStores);
     return (
       <div>
-        <SideMenu />
+        <FilterMenu />
         <MapContainer stores={this.state.currStores} />
         <BottomBar />
       </div>

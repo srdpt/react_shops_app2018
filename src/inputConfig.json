@@ -1,0 +1,48 @@
+{
+  "tabs": [
+    {
+      "elements": [
+        {
+          "input_type": "text",
+          "key": "key"
+        },
+        {
+          "input_type": "text",
+          "key": "longitude"
+        },
+        {
+          "input_type": "text",
+          "key": "latitude"
+        },
+        {
+          "input_type": "text",
+          "key": "ateco_code"
+        },
+        {
+          "input_type": "text",
+          "key": "store_name"
+        },
+        {
+          "input_type": "text",
+          "key": "opened_in_year"
+        },
+        {
+          "input_type": "text",
+          "key": "street_and_number"
+        },
+        {
+          "input_type": "text",
+          "key": "setiere_code"
+        },
+        {
+          "input_type": "text",
+          "key": "store_type"
+        },
+        {
+          "input_type": "text",
+          "key": "ethnicity"
+        }
+      ]
+    }
+  ]
+}
