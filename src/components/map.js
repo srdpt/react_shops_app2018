@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  MarkerClusterer
-} from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import StoreMarker from "../components/store_marker";
 
 const Map = withScriptjs(

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import DownIcon from "../icons/DownIcon.png";
-import { BoxDiv, BoxTitle, ArrowIcon } from "../styles/components/check_list";
-import { fonts, fontSizes, colors } from "../lib/theme";
+import { BoxTitle, ArrowIcon } from "../styles/components/check_list";
+import { fonts, colors } from "../lib/theme";
 import Select from "react-select";
 
 const customSelect = {
