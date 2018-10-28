@@ -4,13 +4,13 @@ import { colors } from "../../lib/theme";
 
 export const SidebarDiv = styled.div`
   width: 80px;
-  height: 99%
+  height: 100%
   position: absolute;
   display: flex;
   flex-direction: column;
   z-index: 10;
   margin-top: -1rem;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
   right: 0px;
   background-color: ${colors.darkBrown};
   justify-content: center;
