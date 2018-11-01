@@ -1,17 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DownIcon from "../icons/DownIcon.png";
-import { BoxTitle, ArrowIcon } from "../styles/components/check_list";
-import { fonts, colors } from "../lib/theme";
+import { colors } from "../lib/theme";
 import { ButtonGroup, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import {
+  GroupContainer,
+  unselected,
+  selected,
+  expansionStyles,
+  titleExpansion
+} from "../styles/components/filter_components";
+import {
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export default class CheckList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listOpen: false,
       cSelected: []
     };
     this.propTypes = {
@@ -20,10 +29,6 @@ export default class CheckList extends React.Component {
     };
     this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
   }
-
-  handleTitleClick = () => {
-    this.setState({ listOpen: !this.state.listOpen });
-  };
 
   onCheckboxBtnClick = selected => {
     const index = this.state.cSelected.indexOf(selected);
@@ -38,44 +43,39 @@ export default class CheckList extends React.Component {
 
   render() {
     const { title, filterList } = this.props;
-    const { listOpen } = this.state;
     return (
-      <div style={{ marginLeft: "30px" }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            paddingTop: "25px"
-          }}
+      <ExpansionPanel style={expansionStyles}>
+        <ExpansionPanelSummary
+          style={titleExpansion}
+          expandIcon={
+            <ExpandMoreIcon
+              style={{
+                color: `${colors.darkBrown}`
+              }}
+            />
+          }
         >
-          <ButtonGroup vertical>
-            {filterList.map(item => (
-              <Button
-                style={
-                  this.state.cSelected.includes(item.key)
-                    ? {
-                        color: `${colors.darkBrown}`,
-                        fontFamily: `${fonts.lato}, sans-serif`,
-                        width: "250px",
-                        marginLeft: "25px",
-                        backgroundColor: `${colors.lightBrown}`
-                      }
-                    : {
-                        color: `${colors.darkBrown}`,
-                        fontFamily: `${fonts.lato}, sans-serif`,
-                        width: "250px",
-                        marginLeft: "25px",
-                        backgroundColor: `${colors.lightBeige}`
-                      }
-                }
-                onClick={() => this.onCheckboxBtnClick(item.key)}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </ButtonGroup>
-        </div>
-      </div>
+          {title}
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <GroupContainer>
+            <ButtonGroup vertical>
+              {filterList.map(item => (
+                <Button
+                  style={
+                    this.state.cSelected.includes(item.key)
+                      ? selected
+                      : unselected
+                  }
+                  onClick={() => this.onCheckboxBtnClick(item.key)}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </ButtonGroup>
+          </GroupContainer>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     );
   }
 }
