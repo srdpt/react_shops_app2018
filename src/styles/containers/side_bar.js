@@ -28,8 +28,4 @@ export const IconContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-export const SidebarIcon = styled.img`
-  margin: 0 auto;
-  height: 50px;
-  width: 50px;
-`;
+export const SidebarIcon = styled.img``;

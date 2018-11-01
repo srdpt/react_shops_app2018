@@ -4,6 +4,9 @@ import {
   IconContainer,
   SidebarIcon
 } from "../styles/containers/side_bar";
+import { colors } from "../lib/theme";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import ViewListIcon from "@material-ui/icons/ViewList";
 import FilterIcon from "../icons/FilterIcon.png";
 import ListIcon from "../icons/ListIcon.png";
 import PropTypes from "prop-types";
@@ -18,10 +21,24 @@ export default class Sidebar extends React.Component {
     return (
       <SidebarDiv>
         <IconContainer onClick={handleFilterClick}>
-          <SidebarIcon src={FilterIcon} style={{ paddingTop: "5px" }} />
+          <DashboardIcon
+            style={{
+              color: `${colors.brown}`,
+              margin: "10 10",
+              height: "40px",
+              width: "40px"
+            }}
+          />
         </IconContainer>
         <IconContainer>
-          <SidebarIcon src={ListIcon} style={{ paddingTop: "10px" }} />
+          <ViewListIcon
+            style={{
+              color: `${colors.brown}`,
+              margin: "10 10",
+              height: "40px",
+              width: "40px"
+            }}
+          />
         </IconContainer>
       </SidebarDiv>
     );
