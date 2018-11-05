@@ -7,17 +7,18 @@ import {
 import { colors } from "../lib/theme";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ViewListIcon from "@material-ui/icons/ViewList";
-import FilterIcon from "../icons/FilterIcon.png";
-import ListIcon from "../icons/ListIcon.png";
+import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import PropTypes from "prop-types";
 
 export default class Sidebar extends React.Component {
   static propTypes = {
-    handleFilterClick: PropTypes.func.isRequired
+    handleFilterClick: PropTypes.func.isRequired,
+    handleListClick: PropTypes.func.isRequired,
+    handleStatsClick: PropTypes.func.isRequired
   };
 
   render() {
-    const { handleFilterClick } = this.props;
+    const { handleFilterClick, handleListClick, handleStatsClick } = this.props;
     return (
       <SidebarDiv>
         <IconContainer onClick={handleFilterClick}>
@@ -30,8 +31,18 @@ export default class Sidebar extends React.Component {
             }}
           />
         </IconContainer>
-        <IconContainer>
+        <IconContainer onClick={handleListClick}>
           <ViewListIcon
+            style={{
+              color: `${colors.brown}`,
+              margin: "10 10",
+              height: "40px",
+              width: "40px"
+            }}
+          />
+        </IconContainer>
+        <IconContainer onClick={handleStatsClick}>
+          <DonutLargeIcon
             style={{
               color: `${colors.brown}`,
               margin: "10 10",

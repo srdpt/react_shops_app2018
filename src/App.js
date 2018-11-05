@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import BottomBar from "./containers/bottom_bar";
-import FilterMenu from "./containers/filter_menu";
+import SideMenu from "./containers/side_menu";
 import MapContainer from "./containers/map_container";
 import * as firebase from "firebase";
 import { initFire } from "./store/firebase";
@@ -37,7 +37,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <FilterMenu />
+        <SideMenu currStores={this.state.currStores} />
         <MapContainer stores={this.state.currStores} />
         <BottomBar />
       </div>

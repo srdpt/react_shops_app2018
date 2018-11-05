@@ -1,13 +1,23 @@
 import React from "react";
-import { AboutText, BottomNavContainer } from "../styles/containers/bottom_bar";
+import { AboutText } from "../styles/containers/bottom_bar";
+import { AppBar } from "@material-ui/core";
+import { colors } from "../lib/theme";
 
 const BottomBar = () => (
-  <BottomNavContainer>
-    <AboutText>About the Map</AboutText>
-    <AboutText> | </AboutText>
-    <AboutText>About the Center</AboutText>
-    <div id="spacer" style={{ width: "200px" }} />
-  </BottomNavContainer>
+  <AppBar
+    position="fixed"
+    style={{
+      top: "auto",
+      bottom: 0,
+      backgroundColor: `${colors.lightBrown}`,
+      flexDirection: "row",
+      justifyContent: "center"
+    }}
+  >
+    <div>
+      <AboutText>Shopp Mapp App 2.0</AboutText>
+    </div>
+  </AppBar>
 );
 
 export default BottomBar;

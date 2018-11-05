@@ -1,0 +1,95 @@
+import React from "react";
+import Sidebar from "./side_bar";
+import { slide as Menu } from "react-burger-menu";
+import "bootstrap/dist/css/bootstrap.min.css";
+import FilterMenu from "./filter_menu";
+import ListMenu from "./list_menu";
+import StatsMenu from "./stats_menu";
+import PropTypes from "prop-types";
+import { colors } from "../lib/theme";
+
+const burgerStyle = {
+  bmMenu: {
+    background: `${colors.lightBeige}`,
+    paddingTop: "20px"
+  },
+  bmOverlay: {
+    background: "rgba(0, 0, 0, 0.3)"
+  }
+};
+
+export default class SideMenu extends React.Component {
+  state = {
+    filterMenu: false,
+    listMenu: false,
+    statsMenu: false
+  };
+
+  static propTypes = {
+    currStores: PropTypes.arrayOf(PropTypes.obj).isRequired
+  };
+
+  clickedFilter = () => {
+    this.setState({
+      filterMenu: !this.state.filterMenu,
+      listMenu: false,
+      statsMenu: false
+    });
+  };
+
+  clickedList = () => {
+    this.setState({
+      listMenu: !this.state.listMenu,
+      filterMenu: false,
+      statsMenu: false
+    });
+  };
+
+  clickedStats = () => {
+    this.setState({
+      statsMenu: !this.state.statsMenu,
+      filterMenu: false,
+      listMenu: false
+    });
+  };
+
+  render() {
+    const { filterMenu, listMenu, statsMenu } = this.state;
+    return (
+      <div>
+        <Sidebar
+          handleFilterClick={this.clickedFilter}
+          handleListClick={this.clickedList}
+          handleStatsClick={this.clickedStats}
+        />
+        <Menu
+          width={"400px"}
+          right
+          customBurgerIcon={false}
+          isOpen={filterMenu}
+          styles={burgerStyle}
+        >
+          <FilterMenu />
+        </Menu>
+        <Menu
+          width={"400px"}
+          right
+          customBurgerIcon={false}
+          isOpen={listMenu}
+          styles={burgerStyle}
+        >
+          <ListMenu stores={this.props.currStores} />
+        </Menu>
+        <Menu
+          width={"400px"}
+          right
+          customBurgerIcon={false}
+          isOpen={statsMenu}
+          styles={burgerStyle}
+        >
+          <StatsMenu />
+        </Menu>
+      </div>
+    );
+  }
+}

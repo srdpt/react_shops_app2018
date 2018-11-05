@@ -2,16 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { colors, fonts, fontSizes } from "../../lib/theme";
 
-export const burgerStyle = {
-  bmMenu: {
-    background: `${colors.lightBeige}`,
-    paddingTop: "20px"
-  },
-  bmOverlay: {
-    background: "rgba(0, 0, 0, 0.3)"
-  }
-};
-
 export const applyButton = {
   color: `${colors.white}`,
   backgroundColor: `${colors.brown}`,
