@@ -62,6 +62,7 @@ export default class CheckList extends React.Component {
             <ButtonGroup vertical>
               {filterList.map(item => (
                 <Button
+                  key={item.key}
                   style={
                     this.state.cSelected.includes(item.key)
                       ? selected

@@ -9,6 +9,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import PropTypes from "prop-types";
+import { AppBar } from "@material-ui/core";
 
 export default class Sidebar extends React.Component {
   static propTypes = {

@@ -7,6 +7,7 @@ import ListMenu from "./list_menu";
 import StatsMenu from "./stats_menu";
 import PropTypes from "prop-types";
 import { colors } from "../lib/theme";
+import PointMenu from "./point_menu";
 
 const burgerStyle = {
   bmMenu: {
@@ -15,6 +16,9 @@ const burgerStyle = {
   },
   bmOverlay: {
     background: "rgba(0, 0, 0, 0.3)"
+  },
+  bmItemList: {
+    overflowY: "scroll"
   }
 };
 
@@ -22,7 +26,9 @@ export default class SideMenu extends React.Component {
   state = {
     filterMenu: false,
     listMenu: false,
-    statsMenu: false
+    statsMenu: false,
+    pointMenu: false,
+    selStore: {}
   };
 
   static propTypes = {
@@ -33,7 +39,8 @@ export default class SideMenu extends React.Component {
     this.setState({
       filterMenu: !this.state.filterMenu,
       listMenu: false,
-      statsMenu: false
+      statsMenu: false,
+      pointMenu: false
     });
   };
 
@@ -41,7 +48,8 @@ export default class SideMenu extends React.Component {
     this.setState({
       listMenu: !this.state.listMenu,
       filterMenu: false,
-      statsMenu: false
+      statsMenu: false,
+      pointMenu: false
     });
   };
 
@@ -49,12 +57,26 @@ export default class SideMenu extends React.Component {
     this.setState({
       statsMenu: !this.state.statsMenu,
       filterMenu: false,
-      listMenu: false
+      listMenu: false,
+      pointMenu: false
     });
   };
 
+  clickedPoint = isOpen => {
+    this.setState({
+      statsMenu: false,
+      filterMenu: false,
+      listMenu: false,
+      pointMenu: isOpen
+    });
+  };
+
+  handleStore = currStore => {
+    this.setState({ selStore: currStore });
+  };
+
   render() {
-    const { filterMenu, listMenu, statsMenu } = this.state;
+    const { filterMenu, listMenu, statsMenu, selStore, pointMenu } = this.state;
     return (
       <div>
         <Sidebar
@@ -62,6 +84,14 @@ export default class SideMenu extends React.Component {
           handleListClick={this.clickedList}
           handleStatsClick={this.clickedStats}
         />
+        <Menu
+          width={"400px"}
+          customBurgerIcon={false}
+          isOpen={pointMenu}
+          styles={burgerStyle}
+        >
+          <PointMenu store={selStore} />
+        </Menu>
         <Menu
           width={"400px"}
           right
@@ -78,7 +108,11 @@ export default class SideMenu extends React.Component {
           isOpen={listMenu}
           styles={burgerStyle}
         >
-          <ListMenu stores={this.props.currStores} />
+          <ListMenu
+            stores={this.props.currStores}
+            onPointClick={this.clickedPoint}
+            selectedStore={this.handleStore}
+          />
         </Menu>
         <Menu
           width={"400px"}
