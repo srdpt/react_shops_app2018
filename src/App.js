@@ -5,12 +5,13 @@ import MapContainer from "./containers/map_container";
 import * as firebase from "firebase";
 import { initFire } from "./store/firebase";
 import { createYearList } from "./constants/year_lists";
+import SearchBar, { searchBar } from "./components/search_bar";
 
 class App extends Component {
   state = {
-    currStores: []
+    currStores: [],
+    searchBar: []
   };
-
   componentWillMount = () => {
     initFire();
     createYearList();
@@ -36,12 +37,21 @@ class App extends Component {
     });
   };
 
+  createSearchBarData = () => {
+    let temp = [];
+    this.state.currStores.map(store => {
+      temp.push({ value: store.name, label: store.name });
+      console.log(temp);
+    });
+    this.setState({ searchBar: temp });
+  };
+
   render() {
     return (
       <div>
         <SideMenu currStores={this.state.currStores} />
         <MapContainer stores={this.state.currStores} />
-        <BottomBar />
+        <BottomBar currStores={this.state.searchBar} />
       </div>
     );
   }
