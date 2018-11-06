@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { colors } from "../lib/theme";
+import { colors } from "../../lib/theme";
 import { ButtonGroup, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -15,24 +15,29 @@ import {
   GroupContainer,
   expansionStyles,
   titleExpansion
-} from "../styles/components/filter_components";
+} from "../../styles/components/filter_components";
 
 export default class RadioList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rSelected: []
-    };
-    this.propTypes = {
-      title: PropTypes.string.isRequired,
-      filterList: PropTypes.arrayOf(PropTypes.obj).isRequired
-    };
-    this.onRadio = this.onRadio.bind(this);
-  }
+  state = {
+    rSelected: []
+  };
+
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    filterList: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.number.isRequired,
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+      })
+    ).isRequired
+  };
 
   onRadio = rSelected => {
     this.setState({ rSelected });
   };
+
+  onRadio = this.onRadio.bind(this);
 
   render() {
     const { title, filterList } = this.props;
@@ -55,6 +60,7 @@ export default class RadioList extends React.Component {
             <ButtonGroup vertical>
               {filterList.map(item => (
                 <Button
+                  key={item.key}
                   style={
                     this.state.rSelected === item.key ? selected : unselected
                   }

@@ -3,13 +3,8 @@ import { AboutText } from "../styles/containers/bottom_bar";
 import { AppBar, Toolbar } from "@material-ui/core";
 import { colors } from "../lib/theme";
 import SearchBar from "../components/search_bar";
-import PropTypes from "prop-types";
 
 export default class BottomBar extends React.Component {
-  static propTypes = {
-    stores: PropTypes.arrayOf(PropTypes.obj).isRequired
-  };
-
   render() {
     return (
       <AppBar
@@ -24,7 +19,7 @@ export default class BottomBar extends React.Component {
         }}
       >
         <Toolbar>
-          <SearchBar currStores={this.props.stores} />
+          <SearchBar />
           <div style={{ paddingTop: "5px", paddingLeft: "225px" }}>
             <AboutText>Venice Project Center Shopp Mapp App 2.0</AboutText>
           </div>

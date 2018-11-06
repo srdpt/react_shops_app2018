@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { colors } from "../lib/theme";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { colors } from "../../lib/theme";
 import Select from "react-select";
-import { allYears } from "../constants/year_lists";
 import {
-  YearContainer,
-  YearText,
-  yearSelect,
+  TagContainer,
+  tagStyle,
   expansionStyles,
   titleExpansion
-} from "../styles/components/filter_components";
+} from "../../styles/components/filter_components";
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -18,15 +15,20 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-export default class YearList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.propTypes = {
-      title: PropTypes.string.isRequired
-    };
-  }
+export default class TagList extends React.Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    filterList: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+      })
+    ).isRequired,
+    multiOptions: PropTypes.bool.isRequired
+  };
 
   render() {
+    const { title, filterList, multiOptions } = this.props;
     return (
       <ExpansionPanel style={expansionStyles}>
         <ExpansionPanelSummary
@@ -39,14 +41,16 @@ export default class YearList extends React.Component {
             />
           }
         >
-          Filter By Year
+          {title}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <YearContainer>
-            <Select options={allYears} isMulti={false} styles={yearSelect} />
-            <YearText> to </YearText>
-            <Select options={allYears} isMulti={false} styles={yearSelect} />
-          </YearContainer>
+          <TagContainer>
+            <Select
+              options={filterList}
+              isMulti={multiOptions}
+              styles={tagStyle}
+            />
+          </TagContainer>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );

@@ -1,13 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { colors } from "../lib/theme";
+import { colors } from "../../lib/theme";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Select from "react-select";
+import { allYears } from "../../constants/year_lists";
 import {
-  TagContainer,
-  tagStyle,
+  YearContainer,
+  YearText,
+  yearSelect,
   expansionStyles,
   titleExpansion
-} from "../styles/components/filter_components";
+} from "../../styles/components/filter_components";
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -15,15 +18,12 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-export default class TagList extends React.Component {
+export default class YearList extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    filterList: PropTypes.arrayOf(PropTypes.obj).isRequired,
-    multiOptions: PropTypes.bool.isRequired
+    title: PropTypes.string.isRequired
   };
 
   render() {
-    const { title, filterList, multiOptions } = this.props;
     return (
       <ExpansionPanel style={expansionStyles}>
         <ExpansionPanelSummary
@@ -36,16 +36,14 @@ export default class TagList extends React.Component {
             />
           }
         >
-          {title}
+          Filter By Year
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <TagContainer>
-            <Select
-              options={filterList}
-              isMulti={multiOptions}
-              styles={tagStyle}
-            />
-          </TagContainer>
+          <YearContainer>
+            <Select options={allYears} isMulti={false} styles={yearSelect} />
+            <YearText> to </YearText>
+            <Select options={allYears} isMulti={false} styles={yearSelect} />
+          </YearContainer>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );

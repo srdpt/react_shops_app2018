@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { List, ListItem, Divider } from "@material-ui/core";
-import { colors, fonts, fontSizes } from "../lib/theme";
+import { colors, fonts, fontSizes } from "../../lib/theme";
 
 export default class ListMenu extends React.Component {
   state = {
@@ -10,7 +10,22 @@ export default class ListMenu extends React.Component {
   };
 
   static propTypes = {
-    stores: PropTypes.arrayOf(PropTypes.obj).isRequired,
+    stores: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        lat: PropTypes.number.isRequired,
+        lon: PropTypes.number.isRequired,
+        yearOpened: PropTypes.number.isRequired,
+        sestiere: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+        nace: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        isCorporate: PropTypes.string.isRequired,
+        ethnicity: PropTypes.string.isRequired,
+        collected: PropTypes.number.isRequired
+      })
+    ).isRequired,
     onPointClick: PropTypes.func.isRequired,
     selectedStore: PropTypes.func.isRequired
   };

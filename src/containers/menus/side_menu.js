@@ -4,10 +4,10 @@ import { slide as Menu } from "react-burger-menu";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FilterMenu from "./filter_menu";
 import ListMenu from "./list_menu";
-import StatsMenu from "./Menus/stats_menu";
+import StatsMenu from "./stats_menu";
 import PropTypes from "prop-types";
 import { colors } from "../../lib/theme";
-import PointMenu from "./Menus/point_menu";
+import PointMenu from "./point_menu";
 
 const burgerStyle = {
   bmMenu: {

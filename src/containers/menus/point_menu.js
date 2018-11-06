@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { colors, fonts, fontSizes } from "../lib/theme";
-import { List, ListItem, Divider, ListItemText } from "@material-ui/core";
+import { colors, fonts, fontSizes } from "../../lib/theme";
+import { List, ListItem, Divider } from "@material-ui/core";
 
 export default class PointMenu extends React.Component {
   static propTypes = {

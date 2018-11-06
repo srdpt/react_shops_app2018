@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import BottomBar from "./containers/bottom_bar";
-import SideMenu from "./containers/side_menu";
+import SideMenu from "./containers/Menus/side_menu";
 import MapContainer from "./containers/map_container";
 import * as firebase from "firebase";
 import { initFire } from "./store/firebase";
 import { createYearList } from "./constants/year_lists";
-import SearchBar, { searchBar } from "./components/search_bar";
 
 class App extends Component {
   state = {
-    currStores: [],
-    searchBar: []
+    currStores: []
   };
+
   componentWillMount = () => {
     initFire();
     createYearList();
@@ -31,19 +30,11 @@ class App extends Component {
         type: item.data.store_type,
         name: item.data.store_name,
         isCorporate: item.data.corporate_ownership,
-        ethnicity: item.data.ethnic_ownership
+        ethnicity: item.data.ethnic_ownership,
+        collected: parseInt(item.data.year_data_collected, 10)
       });
       this.setState({ currStores: temp });
     });
-  };
-
-  createSearchBarData = () => {
-    let temp = [];
-    this.state.currStores.map(store => {
-      temp.push({ value: store.name, label: store.name });
-      console.log(temp);
-    });
-    this.setState({ searchBar: temp });
   };
 
   render() {
@@ -51,7 +42,7 @@ class App extends Component {
       <div>
         <SideMenu currStores={this.state.currStores} />
         <MapContainer stores={this.state.currStores} />
-        <BottomBar currStores={this.state.searchBar} />
+        <BottomBar />
       </div>
     );
   }

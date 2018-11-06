@@ -1,6 +1,5 @@
 import React from "react";
 import Select from "react-select";
-import PropTypes from "prop-types";
 import { colors, fonts } from "../lib/theme";
 
 export const searchBar = {
@@ -9,7 +8,7 @@ export const searchBar = {
     backgroundColor: `${colors.white}`,
     width: "400px"
   }),
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+  option: (styles, { isDisabled }) => {
     return {
       ...styles,
       color: `${colors.darkBrown}`,
@@ -21,14 +20,10 @@ export const searchBar = {
 };
 
 export default class SearchBar extends React.Component {
-  static propTypes = {
-    currStores: PropTypes.arrayOf(PropTypes.obj).isRequired
-  };
-
   render() {
     return (
       <div style={{ paddingTop: "5px" }}>
-        <Select options={this.props.currStores} styles={searchBar} />
+        <Select options={[{ value: "NA", label: "NA" }]} styles={searchBar} />
       </div>
     );
   }

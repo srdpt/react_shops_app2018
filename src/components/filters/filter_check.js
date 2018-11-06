@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { colors } from "../lib/theme";
+import { colors } from "../../lib/theme";
 import { ButtonGroup, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -9,7 +9,7 @@ import {
   selected,
   expansionStyles,
   titleExpansion
-} from "../styles/components/filter_components";
+} from "../../styles/components/filter_components";
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -18,17 +18,20 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export default class CheckList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cSelected: []
-    };
-    this.propTypes = {
-      title: PropTypes.string.isRequired,
-      filterList: PropTypes.arrayOf(PropTypes.obj).isRequired
-    };
-    this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
-  }
+  state = {
+    cSelected: []
+  };
+
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    filterList: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.number.isRequired,
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+      })
+    ).isRequired
+  };
 
   onCheckboxBtnClick = selected => {
     const index = this.state.cSelected.indexOf(selected);
@@ -40,6 +43,8 @@ export default class CheckList extends React.Component {
     this.setState({ cSelected: [...this.state.cSelected] });
     console.log(this.state.cSelected);
   };
+
+  onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
 
   render() {
     const { title, filterList } = this.props;
