@@ -24,11 +24,27 @@ export default class TagList extends React.Component {
         label: PropTypes.string.isRequired
       })
     ).isRequired,
-    multiOptions: PropTypes.bool.isRequired
+    setTags: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+      })
+    )
   };
 
+  state = {
+    tags: null
+  };
+
+  handleChange = tags => {
+    this.setState({ tags });
+    this.props.setTags(this.state.tags);
+  };
+
+  handleChange = this.handleChange.bind(this);
+
   render() {
-    const { title, filterList, multiOptions } = this.props;
+    const { title, filterList } = this.props;
     return (
       <ExpansionPanel style={expansionStyles}>
         <ExpansionPanelSummary
@@ -47,8 +63,9 @@ export default class TagList extends React.Component {
           <TagContainer>
             <Select
               options={filterList}
-              isMulti={multiOptions}
+              isMulti={true}
               styles={tagStyle}
+              onChange={this.handleChange}
             />
           </TagContainer>
         </ExpansionPanelDetails>

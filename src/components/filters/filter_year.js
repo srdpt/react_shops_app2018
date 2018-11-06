@@ -23,6 +23,25 @@ export default class YearList extends React.Component {
     title: PropTypes.string.isRequired
   };
 
+  state = {
+    yearMin: null,
+    yearMax: null
+  };
+
+  handleMin = yearMin => {
+    this.setState({ yearMin });
+    console.log(this.state.yearMin);
+  };
+
+  handleMin = this.handleMin.bind(this);
+
+  handleMax = yearMax => {
+    this.setState({ yearMax });
+    console.log(this.state.yearMax);
+  };
+
+  handleMax = this.handleMax.bind(this);
+
   render() {
     return (
       <ExpansionPanel style={expansionStyles}>
@@ -40,9 +59,19 @@ export default class YearList extends React.Component {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <YearContainer>
-            <Select options={allYears} isMulti={false} styles={yearSelect} />
+            <Select
+              options={allYears}
+              isMulti={false}
+              styles={yearSelect}
+              onChange={this.handleMin}
+            />
             <YearText> to </YearText>
-            <Select options={allYears} isMulti={false} styles={yearSelect} />
+            <Select
+              options={allYears}
+              isMulti={false}
+              styles={yearSelect}
+              onChange={this.handleMax}
+            />
           </YearContainer>
         </ExpansionPanelDetails>
       </ExpansionPanel>
