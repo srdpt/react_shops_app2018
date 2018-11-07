@@ -24,12 +24,7 @@ export default class TagList extends React.Component {
         label: PropTypes.string.isRequired
       })
     ).isRequired,
-    setTags: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired
-      })
-    )
+    setTags: PropTypes.func.isRequired
   };
 
   state = {

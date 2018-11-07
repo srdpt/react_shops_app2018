@@ -13,6 +13,30 @@ import {
 } from "../../styles/containers/filter_menu";
 
 export default class FilterMenu extends React.Component {
+  state = {
+    filterTags: [],
+    ethnicity: [],
+    ownership: "",
+    plateatici: "",
+    yearMin: null,
+    yearMax: null
+  };
+
+  handleTags = currTags => {
+    this.setState({ filterTags: currTags });
+    console.log(this.state.filterTags);
+  };
+
+  handleYearMin = yearStr => {
+    this.setState({ yearMin: yearStr });
+    console.log(this.state.yearMin);
+  };
+
+  handleYearMax = yearStr => {
+    this.setState({ yearMax: yearStr });
+    console.log(this.state.yearMax);
+  };
+
   render() {
     return (
       <div>
@@ -20,12 +44,16 @@ export default class FilterMenu extends React.Component {
           <TagList
             title={"Store Types"}
             filterList={allTags}
-            multiOptions={true}
+            setTags={this.handleTags}
           />
           <CheckList title={"Ethnicity"} filterList={ethnicity} />
           <RadioList title={"Ownership"} filterList={corp} />
           <RadioList title={"Plateatici"} filterList={twoAns} />
-          <YearList title={"Filter By Year"} />
+          <YearList
+            title={"Filter By Year"}
+            setMin={this.handleYearMin}
+            setMax={this.handleYearMax}
+          />
         </div>
         <FilterButtonContainer>
           <Button style={applyButton} onClick={this.handleApply}>

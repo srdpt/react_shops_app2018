@@ -20,7 +20,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export default class YearList extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    setMin: PropTypes.func.isRequired,
+    setMax: PropTypes.func.isRequired
   };
 
   state = {
@@ -30,14 +32,14 @@ export default class YearList extends React.Component {
 
   handleMin = yearMin => {
     this.setState({ yearMin });
-    console.log(this.state.yearMin);
+    this.props.setMin(this.state.yearMin);
   };
 
   handleMin = this.handleMin.bind(this);
 
   handleMax = yearMax => {
     this.setState({ yearMax });
-    console.log(this.state.yearMax);
+    this.props.setMax(this.state.yearMax);
   };
 
   handleMax = this.handleMax.bind(this);
