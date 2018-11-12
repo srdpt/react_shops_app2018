@@ -14,7 +14,7 @@ class App extends Component {
   componentWillMount = () => {
     initFire();
     createYearList();
-    const dataRef = firebase.database().ref("/shops/");
+    const dataRef = firebase.database().ref("/shops/2018/");
     let temp = [];
     dataRef.on("child_added", snapshot => {
       let item = snapshot.val();
@@ -31,10 +31,10 @@ class App extends Component {
         name: item.data.store_name,
         isCorporate: item.data.corporate_ownership,
         ethnicity: item.data.ethnic_ownership,
-        collected: parseInt(item.data.year_data_collected, 10)
+        collected: parseInt(item.data.year_data_collected, 10),
+        grouping: item.data.grouping
       });
       this.setState({ currStores: temp });
-      console.log(this.state.currStores);
     });
   };
 

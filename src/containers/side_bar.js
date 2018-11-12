@@ -1,9 +1,9 @@
 import React from "react";
 import { SidebarDiv, IconContainer } from "../styles/containers/side_bar";
 import { colors } from "../lib/theme";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ViewListIcon from "@material-ui/icons/ViewList";
-import DonutLargeIcon from "@material-ui/icons/DonutLarge";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import ListIcon from "@material-ui/icons/List";
+import ShowChartIcon from "@material-ui/icons/ShowChart";
 import PropTypes from "prop-types";
 
 export default class Sidebar extends React.Component {
@@ -18,7 +18,7 @@ export default class Sidebar extends React.Component {
     return (
       <SidebarDiv>
         <IconContainer onClick={handleFilterClick}>
-          <DashboardIcon
+          <FilterListIcon
             style={{
               color: `${colors.brown}`,
               margin: "10 10",
@@ -28,7 +28,7 @@ export default class Sidebar extends React.Component {
           />
         </IconContainer>
         <IconContainer onClick={handleListClick}>
-          <ViewListIcon
+          <ListIcon
             style={{
               color: `${colors.brown}`,
               margin: "10 10",
@@ -38,7 +38,7 @@ export default class Sidebar extends React.Component {
           />
         </IconContainer>
         <IconContainer onClick={handleStatsClick}>
-          <DonutLargeIcon
+          <ShowChartIcon
             style={{
               color: `${colors.brown}`,
               margin: "10 10",

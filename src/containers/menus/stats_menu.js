@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "reactstrap";
 import { colors, fonts, fontSizes } from "../../lib/theme";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import * as firebase from "firebase";
 
 var LineChart = require("react-chartjs").Line;
 var DoughnutChart = require("react-chartjs").Doughnut;
@@ -53,19 +54,7 @@ var donutData = [
   }
 ];
 
-const queryGroup = async () => {
-  const url = `http://ckdata2.herokuapp.com/api/v1/dataset.json?group_name=MERGE current stores`;
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log(data);
-  // data will be an array of members of the group
-};
-
 export default class StatsMenu extends React.Component {
-  componentWillMount = () => {
-    queryGroup();
-  };
-
   render() {
     return (
       <div style={{ marginLeft: "30px" }}>

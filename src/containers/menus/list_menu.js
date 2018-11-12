@@ -5,7 +5,6 @@ import { colors, fonts, fontSizes } from "../../lib/theme";
 
 export default class ListMenu extends React.Component {
   state = {
-    pointMenu: false,
     selectedStore: {}
   };
 
@@ -26,13 +25,7 @@ export default class ListMenu extends React.Component {
         collected: PropTypes.number.isRequired
       })
     ).isRequired,
-    onPointClick: PropTypes.func.isRequired,
     selectedStore: PropTypes.func.isRequired
-  };
-
-  handlePointClick = () => {
-    this.setState({ pointMenu: true });
-    this.props.onPointClick(this.state.pointMenu);
   };
 
   setStore = currStore => {
@@ -48,7 +41,7 @@ export default class ListMenu extends React.Component {
         <List>
           {this.props.stores.map(store => (
             <div onClick={() => this.setStore(store)} key={store.key}>
-              <ListItem onClick={this.handlePointClick}>
+              <ListItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <p
                     style={{

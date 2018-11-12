@@ -16,7 +16,7 @@ const Map = withScriptjs(
     ));
 
     return (
-      <GoogleMap defaultZoom={14} center={{ lat: 45.43, lng: 12.33 }}>
+      <GoogleMap defaultZoom={15} center={{ lat: 45.435, lng: 12.335 }}>
         {markers}
       </GoogleMap>
     );

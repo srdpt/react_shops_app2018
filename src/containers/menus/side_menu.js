@@ -7,7 +7,6 @@ import ListMenu from "./list_menu";
 import StatsMenu from "./stats_menu";
 import PropTypes from "prop-types";
 import { colors } from "../../lib/theme";
-import PointMenu from "./point_menu";
 
 const burgerStyle = {
   bmMenu: {
@@ -27,7 +26,6 @@ export default class SideMenu extends React.Component {
     filterMenu: false,
     listMenu: false,
     statsMenu: false,
-    pointMenu: false,
     selStore: {}
   };
 
@@ -54,8 +52,7 @@ export default class SideMenu extends React.Component {
     this.setState({
       filterMenu: !this.state.filterMenu,
       listMenu: false,
-      statsMenu: false,
-      pointMenu: false
+      statsMenu: false
     });
   };
 
@@ -63,8 +60,7 @@ export default class SideMenu extends React.Component {
     this.setState({
       listMenu: !this.state.listMenu,
       filterMenu: false,
-      statsMenu: false,
-      pointMenu: false
+      statsMenu: false
     });
   };
 
@@ -72,17 +68,7 @@ export default class SideMenu extends React.Component {
     this.setState({
       statsMenu: !this.state.statsMenu,
       filterMenu: false,
-      listMenu: false,
-      pointMenu: false
-    });
-  };
-
-  clickedPoint = isOpen => {
-    this.setState({
-      statsMenu: false,
-      filterMenu: false,
-      listMenu: false,
-      pointMenu: isOpen
+      listMenu: false
     });
   };
 
@@ -91,7 +77,7 @@ export default class SideMenu extends React.Component {
   };
 
   render() {
-    const { filterMenu, listMenu, statsMenu, selStore, pointMenu } = this.state;
+    const { filterMenu, listMenu, statsMenu, selStore } = this.state;
     return (
       <div>
         <Sidebar
@@ -99,14 +85,6 @@ export default class SideMenu extends React.Component {
           handleListClick={this.clickedList}
           handleStatsClick={this.clickedStats}
         />
-        <Menu
-          width={"400px"}
-          customBurgerIcon={false}
-          isOpen={pointMenu}
-          styles={burgerStyle}
-        >
-          <PointMenu store={selStore} />
-        </Menu>
         <Menu
           width={"400px"}
           right
