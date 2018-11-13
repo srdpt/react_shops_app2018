@@ -38,6 +38,7 @@ export default class ListMenu extends React.Component {
   render() {
     return (
       <div>
+        <div style={{ height: "30px" }} />
         <List>
           {this.props.stores.map(store => (
             <div onClick={() => this.setStore(store)} key={store.key}>

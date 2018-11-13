@@ -40,6 +40,7 @@ export default class FilterMenu extends React.Component {
   render() {
     return (
       <div>
+        <div style={{ height: "40px" }} />
         <div>
           <TagList
             title={"Store Types"}

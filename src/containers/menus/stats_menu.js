@@ -58,6 +58,7 @@ export default class StatsMenu extends React.Component {
   render() {
     return (
       <div style={{ marginLeft: "30px" }}>
+        <div style={{ height: "30px" }} />
         <div
           style={{
             paddingTop: "20px",

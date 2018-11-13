@@ -10,8 +10,8 @@ export default class BottomBar extends React.Component {
       <AppBar
         position="fixed"
         style={{
-          top: "auto",
-          bottom: 0,
+          top: 0,
+          bottom: "auto",
           backgroundColor: `${colors.lightBrown}`,
           flexDirection: "row",
           justifyContent: "flex-start",

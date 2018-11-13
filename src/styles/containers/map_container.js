@@ -7,9 +7,8 @@ export const Container = styled.div`
 `;
 
 export const ContainerElement = styled.div`
-  height: 47vmax;
-  width: 200vmin;
-  margintop: 1rem;
-  marginleft: 1rem;
-  marginright: 1rem;
+  height: 97vmin;
+  width: 197vmin;
+  margin-top: 2rem;
+  margin-right: 1rem;
 `;
