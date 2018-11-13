@@ -14,7 +14,11 @@ export default class StoreMarker extends React.Component {
 
   render() {
     return (
-      <Marker position={this.props.location} onClick={this.onMarkerClick}>
+      <Marker
+        position={this.props.location}
+        onClick={this.onMarkerClick}
+        icon={{ url: this.props.icon }}
+      >
         {this.state.infoOpen && (
           <InfoWindow onCloseClick={() => this.setState({ infoOpen: false })}>
             <div style={{ marginLeft: "30px" }}>

@@ -13,7 +13,7 @@ export const colors = {
   darkBrown: "#30231d",
   red: "#963019",
   green: "#007849",
-  blue: "0375b4"
+  blue: "#0375b4"
 };
 
 export const fonts = {
